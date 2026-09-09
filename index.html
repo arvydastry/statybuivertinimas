@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statybų įvertinimas — nepriklausomas statybų ekspertas Kaune</title>
+<meta name="description" content="Antra nuomonė apie jūsų statybas: sąmatos patikra, darbų kokybės įvertinimas, žalos po draudiminio įvykio skaičiavimas. Kaunas ir rajonas — 150 €, kiti miestai — 200 €.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.pexels.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E4522E'/%3E%3Cpath d='M9 22V11l7-5 7 5v11' stroke='%23fff' stroke-width='2.2' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#1B1B1B;--ink-2:#3B3B3B;--mute:#6F6F6F;--line:#E7E5E1;--line-2:#D6D3CD;
+  --bg:#FFFFFF;--bg-2:#F6F5F2;--sand:#EFE9DD;
+  --terra:#E4522E;--amber:#F5A800;--sky:#8FC4F0;
+  --r:16px;--ease:cubic-bezier(.22,.61,.36,1);
+  --shell:min(1320px,calc(100% - 48px));
+  --font:"Inter Tight",Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.58;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;font-weight:400}
+img,video,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{font-weight:400;margin:0;letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
+p{margin:0}
+::selection{background:var(--amber);color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.shell{width:var(--shell);margin-inline:auto}
+.sec{padding-block:clamp(72px,9vw,128px)}
+.lab{font-size:.9rem;color:var(--mute);letter-spacing:-.005em}
+.lab::before{content:"(";}.lab::after{content:")";}
+.mute{color:var(--mute)}
+.h2{font-size:clamp(28px,3.1vw,42px);letter-spacing:-.03em;line-height:1.12}
+.h3{font-size:clamp(19px,1.6vw,22px);letter-spacing:-.02em;line-height:1.25;font-weight:500}
+.stmt{font-size:clamp(26px,3.2vw,46px);letter-spacing:-.03em;line-height:1.2;max-width:1160px}
+.ul{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px;transition:text-decoration-color .3s}
+.ul:hover{text-decoration-color:transparent}
+.rimg{border-radius:var(--r);overflow:hidden;background:var(--bg-2)}
+.rimg img{width:100%;height:100%;object-fit:cover}
+
+/* pill buttons (Harbor) */
+.pill{display:inline-flex;align-items:center;gap:12px;padding:8px 8px 8px 22px;border-radius:999px;background:var(--ink);color:#fff;
+  font-size:.95rem;font-weight:500;letter-spacing:-.005em;border:1px solid var(--ink);transition:.35s var(--ease);white-space:nowrap}
+.pill i{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;flex:none;transition:.35s var(--ease)}
+.pill i svg{width:14px;height:14px}
+.pill:hover{background:var(--terra);border-color:var(--terra)}
+.pill:hover i{transform:rotate(45deg)}
+.pill.lt{background:#fff;color:var(--ink);border-color:#fff}
+.pill.lt i{background:var(--ink);color:#fff}
+.pill.lt:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pill.lt:hover i{background:#fff;color:var(--ink)}
+.pill.ol{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.pill.ol i{background:var(--ink);color:#fff}
+.pill.ol:hover{background:var(--ink);color:#fff}
+.pill.big{padding:12px 12px 12px 28px;font-size:1.05rem}
+.pill.big i{width:40px;height:40px}
+
+/* ticker */
+.tick{background:var(--terra);color:#fff;height:38px;overflow:hidden;font-size:.84rem;font-weight:500;letter-spacing:.01em;position:relative;z-index:60}
+.tick-in{display:flex;height:100%;align-items:center;width:max-content;animation:tick 46s linear infinite}
+.tick-in span{display:inline-flex;align-items:center;gap:18px;padding-right:18px;white-space:nowrap}
+.tick-in span::before{content:"";width:7px;height:7px;background:#fff;transform:rotate(45deg);flex:none}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:55;color:#fff;margin-bottom:-84px;transition:background .35s,color .35s,border-color .35s;border-bottom:1px solid transparent}
+.hdr.stuck{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);color:var(--ink);border-bottom-color:var(--line)}
+.hdr-in{height:84px;display:flex;align-items:center;gap:32px}
+.hdr.stuck .hdr-in{height:68px}
+.wm{font-weight:500;font-size:1.12rem;letter-spacing:-.025em;flex:none}
+.nav{display:flex;gap:26px;margin-left:auto;font-size:.92rem}
+.nav a{opacity:.85;transition:opacity .25s}.nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
+.hdr-tel{font-size:.92rem;font-weight:500;flex:none;display:inline-flex;align-items:center;gap:8px}
+.hdr-tel svg{width:15px;height:15px}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid currentColor;background:none;cursor:pointer;
+  align-items:center;justify-content:center;flex-direction:column;gap:5px;color:inherit;flex:none}
+.burger i{display:block;width:16px;height:1.5px;background:currentColor;transition:.3s}
+.burger.on i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}.burger.on i:nth-child(2){opacity:0}.burger.on i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:54;background:var(--bg);padding:120px 24px 40px;display:none;flex-direction:column;gap:6px}
+.mnav.on{display:flex}
+.mnav a{font-size:2rem;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid var(--line)}
+.mnav .pill{align-self:flex-start;margin-top:22px}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:600px;max-height:1040px;overflow:hidden;background:#2A2F2A}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 100%)}
+.hero-t{position:absolute;left:0;right:0;bottom:-.06em;z-index:2;color:#fff;font-size:13.2vw;line-height:1;letter-spacing:-.045em;
+  white-space:nowrap;padding:0 1.6vw;font-weight:400}
+.hero-sub{position:absolute;z-index:2;right:2vw;top:120px;color:#fff;font-size:.9rem;max-width:280px;line-height:1.45;opacity:.9;text-align:right}
+
+/* info strip */
+.strip{border-bottom:1px solid var(--line);background:var(--bg)}
+.strip-in{display:grid;grid-template-columns:1.15fr .55fr 1.15fr;gap:40px;padding:30px 0;align-items:center}
+.strip-l{display:grid;grid-template-columns:76px 1fr;gap:20px;align-items:center}
+.strip-l .rimg{width:76px;height:76px;border-radius:12px}
+.strip-l p{font-size:1.02rem;line-height:1.4;margin-bottom:12px;max-width:34ch}
+.strip-m{text-align:center}
+.strip-r{display:flex;justify-content:space-between;align-items:center;gap:30px}
+.strip-r p{font-size:1.02rem;line-height:1.4;max-width:36ch}
+.strip-r .arr{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;flex:none;transition:.3s}
+.strip-r .arr:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.strip-r .arr svg{width:16px;height:16px}
+
+/* about 3-col */
+.about{display:grid;grid-template-columns:1fr 1.55fr 1.05fr;gap:56px;align-items:start;margin-top:clamp(56px,7vw,96px)}
+.about .txt p{font-size:1.02rem;line-height:1.6;color:var(--ink-2);margin-bottom:22px;max-width:52ch}
+.about .txt p:last-of-type{margin-bottom:28px}
+.about .rimg{aspect-ratio:1/1.08}
+.about figcaption{font-size:.84rem;color:var(--mute);margin-top:12px}
+
+/* horizontal panels */
+.hz{position:relative;height:calc(100vh * 3.6)}
+.hz-st{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
+.hz-tr{display:flex;gap:10px;padding:0 10px;height:calc(100vh - 20px);will-change:transform}
+.pnl{flex:0 0 min(84vw,1180px);height:100%;border-radius:22px;padding:clamp(28px,3.4vw,52px);display:grid;
+  grid-template-columns:1.05fr .95fr;grid-template-rows:auto 1fr auto;column-gap:clamp(24px,3vw,48px);color:var(--ink);position:relative;overflow:hidden}
+.pnl.c1{background:var(--terra)}.pnl.c2{background:var(--amber)}.pnl.c3{background:var(--sky)}.pnl.c4{background:var(--ink);color:#fff}
+.pnl .num{font-size:clamp(120px,17vw,270px);line-height:.82;letter-spacing:-.07em;grid-row:1;grid-column:1;margin-left:-.04em}
+.pnl .rimg{grid-column:2;grid-row:1/4;height:100%;border-radius:18px;background:rgba(0,0,0,.12)}
+.pnl h3{grid-column:1;grid-row:2;align-self:end;font-size:clamp(28px,3.4vw,46px);letter-spacing:-.035em;line-height:1.08;max-width:14ch;padding-bottom:22px}
+.pnl p{grid-column:1;grid-row:3;font-size:.98rem;line-height:1.55;max-width:44ch}
+.pnl.c4 p{color:rgba(255,255,255,.78)}
+.pnl .tag{position:absolute;top:clamp(28px,3.4vw,52px);right:clamp(28px,3.4vw,52px);font-size:.82rem;opacity:.75}
+.hz-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font-size:.8rem;color:var(--mute);display:flex;gap:8px;align-items:center;pointer-events:none}
+
+/* sky band */
+.skyb{position:relative;color:#fff;background:#6f8fa8 center/cover no-repeat;padding:clamp(100px,12vw,170px) 0 clamp(56px,6vw,80px);isolation:isolate}
+.skyb::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.18));z-index:-1}
+.skyb .stmt{color:#fff}
+.skyb .stmt .w{opacity:.32;transition:opacity .25s linear}
+.skyb .stmt .w.on{opacity:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:clamp(80px,10vw,150px)}
+.stat .pl{display:inline-block;padding:6px 13px;border-radius:999px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);font-size:.8rem;margin-bottom:16px}
+.stat .n{display:flex;gap:16px;align-items:baseline}
+.stat b{font-weight:400;font-size:clamp(38px,4vw,54px);letter-spacing:-.04em;line-height:1;flex:none}
+.stat p{font-size:.92rem;line-height:1.45;opacity:.92;max-width:26ch}
+
+/* collage + list */
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,110px);align-items:center}
+.collage{position:relative;height:clamp(380px,44vw,620px)}
+.collage .rimg{position:absolute}
+.collage .a{left:0;top:0;width:66%;height:78%}
+.collage .b{right:0;bottom:0;width:48%;height:52%;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.list{display:grid;gap:0}
+.list>div{padding:22px 0;border-top:1px solid var(--line)}
+.list>div:first-child{border-top:0;padding-top:0}
+.list h4{font-size:1.12rem;font-weight:500;letter-spacing:-.02em;margin-bottom:6px}
+.list p{font-size:.95rem;color:var(--ink-2);line-height:1.55;max-width:46ch}
+.errs{margin-top:34px;background:var(--sand);border-radius:var(--r);padding:24px 26px}
+.errs b{display:block;font-weight:500;font-size:.95rem;margin-bottom:12px}
+.errs ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:.92rem;color:var(--ink-2)}
+.errs li{display:flex;gap:10px}.errs li::before{content:"—";color:var(--terra);flex:none}
+
+/* process */
+.proc{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(40px,6vw,100px);align-items:start}
+.proc .rimg{aspect-ratio:4/5;position:sticky;top:96px}
+.proc .rimg video{width:100%;height:100%;object-fit:cover}
+.steps{display:grid}
+.step{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:30px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0;padding-top:0}
+.step em{font-style:normal;font-size:1.9rem;letter-spacing:-.04em;line-height:1;color:var(--terra)}
+.step h4{font-size:1.25rem;font-weight:500;letter-spacing:-.02em;margin-bottom:8px}
+.step p{color:var(--ink-2);font-size:.98rem;line-height:1.55;max-width:50ch}
+
+/* calculators */
+.calc{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--bg)}
+.ctabs{display:flex;gap:8px;padding:14px;border-bottom:1px solid var(--line);flex-wrap:wrap;background:var(--bg-2)}
+.ctab{border:1px solid transparent;background:transparent;border-radius:999px;padding:11px 20px;cursor:pointer;font-size:.95rem;font-weight:500;color:var(--mute);transition:.25s}
+.ctab:hover{color:var(--ink)}
+.ctab[aria-selected="true"]{background:var(--ink);color:#fff}
+.cpanel{display:none;grid-template-columns:1.1fr .9fr}
+.cpanel.on{display:grid}
+.cf{padding:clamp(26px,3vw,44px);border-right:1px solid var(--line)}
+.co{padding:clamp(26px,3vw,44px);background:var(--sand);display:flex;flex-direction:column}
+.fg{margin-bottom:28px}.fg:last-child{margin-bottom:0}
+.fl{display:block;font-size:.95rem;font-weight:500;margin-bottom:12px}
+.fl s{text-decoration:none;color:var(--mute);font-weight:400}
+.opts{display:grid;gap:8px}.opts.c2{grid-template-columns:1fr 1fr}.opts.c3{grid-template-columns:repeat(3,1fr)}
+.opt{position:relative}.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt span{display:block;padding:14px 16px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;font-size:.93rem;font-weight:500;line-height:1.35;transition:.25s}
+.opt span small{display:block;font-weight:400;font-size:.8rem;color:var(--mute);margin-top:3px}
+.opt span:hover{border-color:var(--ink)}
+.opt input:checked+span{background:var(--ink);color:#fff;border-color:var(--ink)}
+.opt input:checked+span small{color:rgba(255,255,255,.65)}
+.opt input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.rng{display:flex;align-items:center;gap:18px}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:2px;background:var(--line-2);outline:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--ink);border:4px solid #fff;box-shadow:0 0 0 1px var(--line-2);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid #fff;cursor:pointer}
+.rv{font-size:1.5rem;letter-spacing:-.03em;min-width:96px;text-align:right}.rv i{font-style:normal;font-size:.85rem;color:var(--mute)}
+.sel{width:100%;padding:14px 16px;border:1px solid var(--line-2);border-radius:12px;background:#fff;font-size:.95rem;appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231B1B1B' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:12px}
+.co .lab{margin-bottom:18px;display:block}
+.on1{font-size:clamp(34px,3.6vw,52px);letter-spacing:-.045em;line-height:1;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.on1.rng2{font-size:clamp(26px,2.7vw,38px)}
+.on1 i{font-style:normal;font-size:.4em;color:var(--mute);letter-spacing:-.01em}
+.osub{font-size:.9rem;color:var(--ink-2);margin-top:12px;line-height:1.5}
+.orows{margin-top:auto;padding-top:26px}
+.orow{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid rgba(0,0,0,.1);font-size:.9rem;align-items:baseline}
+.orow span{color:var(--ink-2)}.orow b{font-weight:500;white-space:nowrap}
+.orow.tot{border-top:1px solid var(--ink)}.orow.tot b{font-size:1.25rem;letter-spacing:-.02em;color:var(--terra)}
+.bars{margin-top:24px;display:grid;gap:10px}
+.bar b{display:flex;justify-content:space-between;font-size:.8rem;font-weight:400;margin-bottom:5px;color:var(--ink-2)}
+.bar-t{height:5px;background:rgba(0,0,0,.09);border-radius:99px;overflow:hidden}
+.bar-f{height:100%;background:var(--ink);border-radius:99px;width:0;transition:width .9s var(--ease)}
+.disc{margin-top:24px;font-size:.8rem;color:var(--mute);line-height:1.5;padding-top:16px;border-top:1px solid rgba(0,0,0,.1)}
+
+/* testimonials */
+.tst{display:grid;grid-template-columns:120px 1fr 120px;align-items:center;gap:20px}
+.tst .side{font-size:.9rem;color:var(--ink-2)}
+.tst .side:last-child{text-align:right}
+.tcards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:20px 0}
+.tc{border-radius:20px;padding:30px 30px 28px;color:var(--ink);display:grid;grid-template-rows:auto 1fr auto;min-height:420px;transition:transform .5s var(--ease)}
+.tc:nth-child(1){background:var(--amber);transform:rotate(-2deg)}
+.tc:nth-child(2){background:var(--terra);transform:translateY(-14px)}
+.tc:nth-child(3){background:var(--sky);transform:rotate(2deg)}
+.tc:hover{transform:rotate(0) translateY(-8px)}
+.tc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.tc-top b{font-weight:400;font-size:3.2rem;letter-spacing:-.05em;line-height:1}
+.tc-top .rimg{width:72px;height:92px;border-radius:12px}
+.tc q{display:block;font-size:1.06rem;line-height:1.45;letter-spacing:-.01em;align-self:end;margin:40px 0 26px;quotes:"„" "“"}
+.tc q::before{content:open-quote}.tc q::after{content:close-quote}
+.tc .who b{font-weight:500;font-size:.92rem;display:block}
+.tc .who span{font-size:.82rem;opacity:.8}
+
+/* pricing */
+.prc{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pc{border-radius:22px;padding:clamp(28px,3vw,44px);border:1px solid var(--line);display:flex;flex-direction:column}
+.pc.hi{background:var(--sand);border-color:var(--sand)}
+.pc h3{font-size:1.35rem;font-weight:500;letter-spacing:-.025em;margin-bottom:6px}
+.pc>p{font-size:.92rem;color:var(--mute);margin-bottom:26px;max-width:40ch}
+.pc .pn{font-size:clamp(52px,5.4vw,76px);letter-spacing:-.05em;line-height:1;display:flex;gap:10px;align-items:baseline}
+.pc .pn i{font-style:normal;font-size:.28em;color:var(--mute);letter-spacing:0}
+.pc ul{list-style:none;margin:28px 0 30px;padding:24px 0 0;border-top:1px solid rgba(0,0,0,.1);display:grid;gap:11px;font-size:.95rem;color:var(--ink-2)}
+.pc li{display:flex;gap:11px}.pc li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--terra);flex:none;margin-top:9px}
+.pc .pill{margin-top:auto;align-self:flex-start}
+
+/* wizard */
+.wiz{border:1px solid var(--line);border-radius:22px;background:var(--bg);max-width:920px;margin-inline:auto;overflow:hidden}
+.wtop{padding:22px clamp(22px,3vw,40px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:22px;flex-wrap:wrap;background:var(--bg-2)}
+.wprog{flex:1;min-width:180px}
+.wprog b{font-size:.82rem;font-weight:500;color:var(--mute);display:block;margin-bottom:9px}
+.wbar{height:4px;background:var(--line-2);border-radius:99px}.wbar i{display:block;height:100%;background:var(--ink);border-radius:99px;width:20%;transition:width .5s var(--ease)}
+.wtel{font-size:.9rem;display:inline-flex;gap:8px;align-items:center}.wtel b{font-weight:500}
+.wbody{padding:clamp(28px,4vw,52px) clamp(22px,3vw,40px)}
+.wstep{display:none;animation:fin .45s var(--ease)}.wstep.on{display:block}
+@keyframes fin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.wstep h3{font-size:clamp(24px,2.7vw,34px);letter-spacing:-.03em;margin-bottom:10px}
+.wstep .wsub{color:var(--mute);font-size:1rem;margin-bottom:30px;max-width:56ch}
+.bopts{display:grid;gap:10px}.bopts.c2{grid-template-columns:1fr 1fr}
+.bopt{position:relative}.bopt input{position:absolute;opacity:0;width:0;height:0}
+.bopt input+span{display:flex;align-items:center;gap:16px;min-height:76px;padding:18px 22px;border:1.5px solid var(--line-2);border-radius:16px;cursor:pointer;
+  font-size:1.06rem;font-weight:500;line-height:1.3;transition:.25s var(--ease)}
+.bopt input+span>span{display:block;flex:1}
+.bopt span small{display:block;font-weight:400;font-size:.86rem;color:var(--mute);margin-top:4px;line-height:1.4}
+.bopt span em{font-style:normal;width:38px;height:38px;flex:none;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;font-size:.85rem;transition:.25s}
+.bopt input+span:hover{border-color:var(--ink)}
+.bopt input:checked+span{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bopt input:checked+span small{color:rgba(255,255,255,.68)}
+.bopt input:checked+span em{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.bopt input:focus-visible+span{outline:2px solid var(--ink);outline-offset:3px}
+.fin{width:100%;padding:18px 20px;border:1.5px solid var(--line-2);border-radius:14px;background:#fff;font-size:1.04rem;transition:border-color .25s}
+.fin:focus{border-color:var(--ink);outline:0}.fin::placeholder{color:#A6A39C}
+textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wnav{display:flex;gap:12px;align-items:center;margin-top:36px;padding-top:28px;border-top:1px solid var(--line);flex-wrap:wrap}
+.wback{background:none;border:0;color:var(--mute);cursor:pointer;font-weight:500;font-size:.92rem;padding:12px 4px;display:inline-flex;gap:8px;align-items:center}
+.wback:hover{color:var(--ink)}
+.wnav .pill{margin-left:auto}
+.whelp{width:100%;font-size:.86rem;color:var(--mute);order:9}
+.plive{border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--sand);border-color:var(--sand)}
+.plive span{font-size:.92rem;color:var(--ink-2)}.plive b{font-size:1.8rem;letter-spacing:-.04em;font-weight:400}
+.summ{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.sr{display:flex;justify-content:space-between;gap:18px;padding:15px 22px;border-bottom:1px solid var(--line);font-size:.96rem;align-items:baseline}
+.sr:last-child{border-bottom:0}.sr span{color:var(--mute);flex:none}.sr b{font-weight:500;text-align:right}
+.sr.tot{background:var(--ink);color:#fff}.sr.tot span{color:rgba(255,255,255,.65)}.sr.tot b{font-size:1.4rem;letter-spacing:-.03em;color:var(--amber);font-weight:400}
+.done{text-align:center;padding:20px 0}
+.done .ic{width:76px;height:76px;border-radius:50%;background:var(--amber);display:grid;place-items:center;margin:0 auto 26px}
+.done .ic svg{width:30px;height:30px}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:.86rem;color:var(--mute);line-height:1.5;margin-top:20px;cursor:pointer}
+.chk input{width:20px;height:20px;flex:none;margin:1px 0 0;accent-color:var(--ink)}
+.err{color:#C4321B;font-size:.86rem;font-weight:500;margin-top:9px;display:none}.err.on{display:block}
+
+/* faq */
+.faq{border-top:1px solid var(--line);max-width:960px}
+.qa{border-bottom:1px solid var(--line)}
+.qq{width:100%;background:none;border:0;padding:24px 56px 24px 0;text-align:left;cursor:pointer;position:relative;font-size:clamp(17px,1.6vw,21px);letter-spacing:-.02em;line-height:1.35;font-weight:500}
+.qq i{position:absolute;right:0;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:1px solid var(--line-2);transition:.3s}
+.qq i::before,.qq i::after{content:"";position:absolute;background:var(--ink);left:50%;top:50%;transition:transform .35s var(--ease)}
+.qq i::before{width:12px;height:1.5px;transform:translate(-50%,-50%)}.qq i::after{width:1.5px;height:12px;transform:translate(-50%,-50%)}
+.qa.on .qq i{background:var(--ink)}.qa.on .qq i::before,.qa.on .qq i::after{background:#fff}.qa.on .qq i::after{transform:translate(-50%,-50%) rotate(90deg) scaleY(0)}
+.qa-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.qa-a p{padding:0 90px 26px 0;color:var(--ink-2);font-size:1rem;line-height:1.65;max-width:70ch}
+
+/* final cta + footer */
+.fcta{text-align:center;padding:clamp(70px,9vw,130px) 0 clamp(40px,5vw,70px)}
+.fcta p{font-size:clamp(24px,3vw,42px);letter-spacing:-.03em;line-height:1.2;max-width:24ch;margin-inline:auto}
+.fcta p a{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.fcta p a:hover{color:var(--terra)}
+.fcta .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.ftr{border-top:1px solid var(--line);padding-top:26px;position:relative;overflow:hidden}
+.ftr-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:.86rem;color:var(--mute);align-items:center}
+.ftr-in nav{display:flex;gap:18px}.ftr-in a:hover{color:var(--ink)}
+.ftr-in .soc{display:flex;gap:14px}.ftr-in .soc svg{width:16px;height:16px}
+.wmk{margin-top:46px;height:clamp(90px,15vw,240px);overflow:hidden;position:relative;background:radial-gradient(60% 120% at 50% 100%,rgba(228,82,46,.55),rgba(245,168,0,.25) 45%,transparent 75%)}
+.wmk span{position:absolute;left:50%;bottom:-.24em;transform:translateX(-50%);font-size:clamp(84px,11.2vw,190px);letter-spacing:-.05em;line-height:1;white-space:nowrap;color:var(--ink)}
+.callbar{position:fixed;inset:auto 0 0;z-index:52;display:none;grid-template-columns:1fr 1fr;background:var(--ink);color:#fff;border-top:1px solid rgba(255,255,255,.1)}
+.callbar a{padding:16px;text-align:center;font-weight:500;font-size:.95rem;display:flex;gap:8px;align-items:center;justify-content:center}
+.callbar a:first-child{background:var(--terra)}
+.callbar svg{width:15px;height:15px}
+
+/* reveal */
+.r{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.r.seen{opacity:1;transform:none}
+
+/* responsive */
+@media(max-width:1080px){
+  .about{grid-template-columns:1fr 1.4fr;gap:40px}.about .lab{grid-column:1/-1}
+  .tst{grid-template-columns:1fr}.tst .side{display:none}
+  .nav{display:none}.burger{display:flex}
+}
+@media(max-width:900px){
+  :root{--shell:calc(100% - 36px)}
+  .hero-t{white-space:normal;font-size:19vw;line-height:.9;bottom:.16em}
+  .hero-sub{display:none}
+  .strip-in{grid-template-columns:1fr;gap:22px;padding:26px 0}
+  .strip-m{text-align:left}.strip-r .arr{display:none}
+  .about{grid-template-columns:1fr}.about .rimg{max-width:420px}
+  .hz{height:auto}.hz-st{position:static;height:auto;display:block}.hz-tr{flex-direction:column;height:auto;padding:0 10px;gap:10px}
+  .pnl{flex:none;min-height:0;grid-template-columns:1fr;grid-template-rows:auto auto auto auto;padding:28px 24px;border-radius:18px}
+  .pnl .num{font-size:110px;grid-row:1}.pnl .rimg{grid-column:1;grid-row:2;height:260px;margin:18px 0 22px;border-radius:14px}
+  .pnl h3{grid-row:3;padding-bottom:12px}.pnl p{grid-row:4}
+  .hz-hint{display:none}
+  .stats{grid-template-columns:1fr;gap:26px}
+  .two{grid-template-columns:1fr}.collage{height:min(78vw,420px)}
+  .proc{grid-template-columns:1fr}.proc .rimg{position:static;aspect-ratio:4/3}
+  .cpanel.on{grid-template-columns:1fr}.cf{border-right:0;border-bottom:1px solid var(--line)}
+  .opts.c2,.opts.c3,.bopts.c2,.f2{grid-template-columns:1fr}
+  .tcards{grid-template-columns:1fr;gap:16px}.tc{min-height:0}.tc:nth-child(n){transform:none}
+  .prc{grid-template-columns:1fr}
+  .qa-a p{padding-right:20px}
+  .callbar{display:grid}body{padding-bottom:54px}
+  .hdr-tel span{display:none}
+  .wmk span{font-size:15vw}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .r{opacity:1;transform:none}.tick-in{animation:none}
+  .hz{height:auto}.hz-st{position:static;height:auto;display:block}.hz-tr{flex-direction:column;height:auto}
+  .pnl{flex:none;min-height:80vh}.hz-hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="tick" aria-hidden="true"><div class="tick-in" id="tick">
+  <span>Nepriklausomas statybų ekspertas</span><span>Kaunas ir rajonas — 150 €</span><span>Kiti miestai — 200 €</span><span>Skambinkite +370 601 31453</span><span>Vizitas per 2–3 darbo dienas</span><span>Nerekomenduojame parduotuvių ir meistrų</span>
+</div></div>
+
+<header class="hdr" id="hdr">
+  <div class="shell hdr-in">
+    <a href="#top" class="wm">Statybų įvertinimas</a>
+    <nav class="nav" aria-label="Meniu">
+      <a href="#apie">Apie</a><a href="#paslaugos">Paslaugos</a><a href="#kaip">Kaip vyksta</a><a href="#skaiciuokles">Skaičiuoklės</a><a href="#kainos">Kainos</a><a href="#duk">D.U.K.</a>
+    </nav>
+    <a class="hdr-tel" href="tel:+37060131453"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>+370 601 31453</span></a>
+    <button class="burger" id="burger" aria-label="Meniu" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Mobilus meniu">
+  <a href="#apie">Apie</a><a href="#paslaugos">Paslaugos</a><a href="#kaip">Kaip vyksta</a><a href="#skaiciuokles">Skaičiuoklės</a><a href="#kainos">Kainos</a><a href="#duk">D.U.K.</a><a href="#uzklausa">Užklausa</a>
+  <a class="pill" href="tel:+37060131453">Skambinti +370 601 31453 <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
+</nav>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <img class="poster" src="https://images.pexels.com/videos/9554338/pexels-photo-9554338.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Statomų namų kvartalas iš viršaus" fetchpriority="high">
+  <video id="hv" autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/videos/9554338/pexels-photo-9554338.jpeg?auto=compress&cs=tinysrgb&w=1600" aria-hidden="true">
+    <source src="https://videos.pexels.com/video-files/9554338/9554338-hd_1920_1080_30fps.mp4" type="video/mp4">
+  </video>
+  <p class="hero-sub">Nepriklausomas statybų ekspertas. Atvykstame į objektą Kaune ir visoje Lietuvoje.</p>
+  <h1 class="hero-t">Antra nuomonė.</h1>
+</section>
+
+<!-- INFO STRIP -->
+<section class="strip">
+  <div class="shell strip-in">
+    <div class="strip-l">
+      <div class="rimg"><img src="https://images.pexels.com/photos/7937731/pexels-photo-7937731.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div>
+      <div>
+        <p>Nepriklausomas statybų ekspertas Kaune ir visoje Lietuvoje.</p>
+        <a class="pill" href="tel:+37060131453">Skambinti +370 601 31453 <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
+      </div>
+    </div>
+    <div class="strip-m lab">Kaunas · 150 €</div>
+    <div class="strip-r">
+      <p>Atvykstame į objektą, patikriname sąmatą, darbus ar žalą — ir pasakome, kaip yra iš tikrųjų.</p>
+      <a class="arr" href="#apie" aria-label="Žemyn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT + ABOUT -->
+<section class="sec" id="apie">
+  <div class="shell">
+    <p class="stmt r">Rangovas nori parduoti darbus. Tiekėjas — daugiau medžiagų. Draudikas — sumokėti mažiau. Mes neturime jokio intereso, išskyrus vieną: kad žinotumėte, kaip yra iš tikrųjų.</p>
+    <div class="about">
+      <span class="lab r">Apie ekspertą</span>
+      <div class="txt r">
+        <p>Dvidešimt metų dirbau statybų priežiūroje: priiminėjau darbus, tikrinau sąmatas, ėjau per objektus su rangovais ir užsakovais. Mačiau, kaip žmonės permoka dešimtis tūkstančių tik todėl, kad neturėjo su kuo pasitarti prieš pasirašydami.</p>
+        <p>Todėl dabar dirbu tik vienai pusei — jums. Atvažiuoju, apžiūriu, suskaičiuoju ir pasakau, ką matau. Be gražinimo ir be gąsdinimo. Nerekomenduoju nei parduotuvių, nei meistrų — kad galėčiau kalbėti laisvai.</p>
+        <a class="ul" href="#kaip">Kaip vyksta vizitas</a>
+      </div>
+      <figure class="r" style="margin:0">
+        <div class="rimg"><img src="https://images.pexels.com/photos/28663270/pexels-photo-28663270.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Statybų ekspertas" loading="lazy"></div>
+        <figcaption>Statybų inžinierius, Kaunas</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- HORIZONTAL PANELS -->
+<section class="hz" id="paslaugos">
+  <div class="hz-st">
+    <div class="hz-tr" id="hztr">
+      <article class="pnl c1">
+        <span class="tag">01 / 04 · Planavimas</span>
+        <div class="num">01</div>
+        <div class="rimg"><img src="https://images.pexels.com/photos/6282077/pexels-photo-6282077.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Ranka braižo namo brėžinį" loading="lazy"></div>
+        <h3>Planuoju statytis, bet nežinau nuo ko pradėti</h3>
+        <p>Nuo ko pradėti, kokia darbų seka, kiek ko reikės ir koks biudžetas yra realus, o koks — tik gražus skaičius. Susitinkame prieš jums užsakant projektą ar perkant sklypą.</p>
+      </article>
+      <article class="pnl c2">
+        <span class="tag">02 / 04 · Sąmata</span>
+        <div class="num">02</div>
+        <div class="rimg"><img src="https://images.pexels.com/photos/33175649/pexels-photo-33175649.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Sąmatos skaičiavimas su skaičiuotuvu" loading="lazy"></div>
+        <h3>Gavau sąmatą ir noriu ją patikrinti</h3>
+        <p>Peržiūrime eilutė po eilutės: kiekiai, įkainiai, dubliavimai, pamiršti darbai. Dažniausiai randame 8–15 % skirtumą — kartais jūsų, kartais rangovo nenaudai.</p>
+      </article>
+      <article class="pnl c3">
+        <span class="tag">03 / 04 · Kokybė</span>
+        <div class="num">03</div>
+        <div class="rimg"><img src="https://images.pexels.com/photos/7937329/pexels-photo-7937329.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Ekspertė su dokumentais tikrina neįrengtas patalpas" loading="lazy"></div>
+        <h3>Darbai jau vyksta — ar daroma teisingai?</h3>
+        <p>Atvykstame darbų eigoje: pamatai, mūras, stogas, inžinerija. Trūkumus užfiksuojame, kol jie dar neuždengti apdaila ir kol juos taisyti pigu.</p>
+      </article>
+      <article class="pnl c4">
+        <span class="tag">04 / 04 · Žala</span>
+        <div class="num">04</div>
+        <div class="rimg"><img src="https://images.pexels.com/photos/14032089/pexels-photo-14032089.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Užlietos lubos su pažeidimais" loading="lazy"></div>
+        <h3>Užliejo, sudegė, įskilo</h3>
+        <p>Įvertiname žalos mastą ir suskaičiuojame, kiek realiai kainuos atstatyti. Su savo skaičiais į derybas su draudiku eisite ramiau — ir dažniausiai gausite daugiau.</p>
+      </article>
+    </div>
+    <div class="hz-hint">Slinkite žemyn <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+  </div>
+</section>
+
+<!-- SKY STATEMENT + STATS -->
+<section class="skyb" style="background-image:url('https://images.pexels.com/photos/9158825/pexels-photo-9158825.jpeg?auto=compress&cs=tinysrgb&w=2000')">
+  <div class="shell">
+    <p class="stmt" id="skystmt">Nerekomenduojame parduotuvių. Nesiūlome meistrų. Neimame komisinių. Todėl galime pasakyti tai, ko kiti nepasakys.</p>
+    <div class="stats">
+      <div class="stat r"><span class="pl">Vizitų 2025 m.</span><div class="n"><b>340+</b><p>Kaune, Vilniuje, Klaipėdoje ir mažesniuose miesteliuose.</p></div></div>
+      <div class="stat r"><span class="pl">Vidutinis rastas skirtumas</span><div class="n"><b>11 %</b><p>tarp pateiktos sąmatos ir realios rinkos kainos.</p></div></div>
+      <div class="stat r"><span class="pl">Perskambiname per</span><div class="n"><b>1 d.d.</b><p>Dažniausiai — tą pačią dieną iki 18:00.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="sec">
+  <div class="shell">
+    <p class="stmt r" style="margin-bottom:clamp(50px,6vw,90px)">Po vizito turėsite ne įspūdį, o skaičius: kiek ko reikės, kiek tai kainuoja rinkoje, kur rizika ir kiek laiko realiai užtruks.</p>
+    <div class="two">
+      <div class="collage r">
+        <div class="rimg a"><img src="https://images.pexels.com/photos/8491085/pexels-photo-8491085.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Medinė stogo konstrukcija statybų metu" loading="lazy"></div>
+        <div class="rimg b"><img src="https://images.pexels.com/photos/19688828/pexels-photo-19688828.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Rankos mūrija plytas" loading="lazy"></div>
+      </div>
+      <div class="r">
+        <div class="list">
+          <div><h4>Skaičiai, ne įspūdžiai</h4><p>Kiekiai ir kainos pagal šių metų rinką, palyginti su tuo, ką jums pasiūlė.</p></div>
+          <div><h4>Rizikos su kaina</h4><p>Kas gali pabrangti ir kiek. Kurie sprendimai vėliau bus sunkiai pataisomi.</p></div>
+          <div><h4>Realūs terminai</h4><p>Įskaitant džiūvimo pertraukas ir sezoną — ne tik rangovo optimizmą.</p></div>
+          <div><h4>Santrauka raštu</h4><p>Paprasta kalba, be žargono. Perskaitysite ramiai ir parodysite artimiesiems.</p></div>
+        </div>
+        <div class="errs">
+          <b>Ką dažniausiai randame sąmatose</b>
+          <ul>
+            <li>Tinkavimas įtrauktas du kartus — skirtingose eilutėse</li>
+            <li>„Smulkūs darbai“ — 4–6 tūkst. € be jokio paaiškinimo</li>
+            <li>Stogo danga be pakalimo, latakų ir vėjalenčių</li>
+            <li>Neįvertintas gruntinio vandens lygis — vėliau atsiranda drenažas</li>
+            <li>Elektros instaliacija „pagal susitarimą“, be projekto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="kaip" style="padding-top:0">
+  <div class="shell">
+    <div class="proc">
+      <div class="rimg r">
+        <video autoplay muted loop playsinline preload="none" poster="https://images.pexels.com/videos/6474265/pexels-photo-6474265.jpeg?auto=compress&cs=tinysrgb&w=1000" aria-hidden="true" data-src="https://videos.pexels.com/video-files/6474265/6474265-hd_1920_1080_25fps.mp4"></video>
+      </div>
+      <div>
+        <span class="lab r">Kaip vyksta</span>
+        <h2 class="h2 r" style="margin:16px 0 40px">Keturi žingsniai.<br>Be biurokratijos.</h2>
+        <div class="steps">
+          <div class="step r"><em>01</em><div><h4>Susisiekiate</h4><p>Paskambinate arba užpildote užklausą — 5 paprasti klausimai, apie 2 minutes. Klausiame tik to, ko tikrai reikia.</p></div></div>
+          <div class="step r"><em>02</em><div><h4>Suderiname vizitą</h4><p>Perskambiname tą pačią arba kitą darbo dieną ir sutariame laiką bei vietą — objekte arba pas jus namuose.</p></div></div>
+          <div class="step r"><em>03</em><div><h4>Susitinkame vietoje</h4><p>Apžiūrime, matuojame, peržiūrime dokumentus ir sąmatas. Skiriame 1–2 valandas — tiek, kiek reikia klausimui išsiaiškinti.</p></div></div>
+          <div class="step r"><em>04</em><div><h4>Gaunate išvadas</h4><p>Santrauka raštu su skaičiais, rizikomis ir rekomendacijomis. Iškilus klausimams — atsakome ir po susitikimo.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATORS -->
+<section class="sec" id="skaiciuokles" style="background:var(--bg-2)">
+  <div class="shell">
+    <span class="lab r">Skaičiuoklės</span>
+    <h2 class="h2 r" style="margin:16px 0 14px;max-width:16ch">Pasitikrinkite skaičius per pusę minutės.</h2>
+    <p class="mute r" style="max-width:56ch;margin-bottom:40px">Pirmoji — tiksli paslaugos kaina. Kitos dvi — orientacinės, kad žinotumėte, apie kokius pinigus kalbame dar prieš skambindami.</p>
+    <div class="calc r">
+      <div class="ctabs" role="tablist">
+        <button class="ctab" role="tab" aria-selected="true" aria-controls="cp1" id="ct1">Eksperto vizito kaina</button>
+        <button class="ctab" role="tab" aria-selected="false" aria-controls="cp2" id="ct2">Statybos biudžetas</button>
+        <button class="ctab" role="tab" aria-selected="false" aria-controls="cp3" id="ct3">Žalos sutvarkymas</button>
+      </div>
+      <div class="cpanel on" id="cp1" role="tabpanel">
+        <div class="cf">
+          <div class="fg"><label class="fl">Kur yra objektas?</label>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="c1reg" value="150" checked><span>Kaunas ir Kauno rajonas<small>Garliava, Domeikava, Raudondvaris, Karmėlava, Ringaudai ir kt.</small></span></label>
+              <label class="opt"><input type="radio" name="c1reg" value="200"><span>Kitas Lietuvos miestas<small>Vilnius, Klaipėda, Šiauliai, Panevėžys, Alytus…</small></span></label>
+            </div></div>
+          <div class="fg"><label class="fl">Koks tai objektas? <s>— kainos nekeičia</s></label>
+            <div class="opts c2">
+              <label class="opt"><input type="radio" name="c1obj" checked><span>Gyvenamasis namas</span></label>
+              <label class="opt"><input type="radio" name="c1obj"><span>Butas</span></label>
+              <label class="opt"><input type="radio" name="c1obj"><span>Sodo namas</span></label>
+              <label class="opt"><input type="radio" name="c1obj"><span>Komercinės patalpos</span></label>
+            </div></div>
+          <div class="fg"><label class="fl" for="c1typ">Su kuo susijęs klausimas?</label>
+            <select class="sel" id="c1typ"><option>Nežinau nuo ko pradėti statybas</option><option>Turimos sąmatos patikrinimas</option><option>Darbų kokybės įvertinimas</option><option>Draudiminis įvykis / patirta žala</option><option>Kitas klausimas</option></select></div>
+        </div>
+        <div class="co">
+          <span class="lab">Paslaugos kaina</span>
+          <div class="on1"><span id="c1sum">150</span> € <i>/ vizitas</i></div>
+          <p class="osub" id="c1note">Kaina galutinė. Nepriklauso nei nuo objekto dydžio, nei nuo susitikimo trukmės.</p>
+          <div class="orows">
+            <div class="orow"><span>Atvykimas ir apžiūra vietoje</span><b>150 €</b></div>
+            <div class="orow"><span>Kelionė už Kauno regiono ribų</span><b id="c1trip">—</b></div>
+            <div class="orow"><span>Skaičiavimai, rizikos, santrauka raštu</span><b>įskaičiuota</b></div>
+            <div class="orow tot"><span>Iš viso</span><b id="c1tot">150 €</b></div>
+          </div>
+          <a class="pill" href="#uzklausa" style="margin-top:24px;align-self:flex-start">Užsakyti vizitą <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
+        </div>
+      </div>
+      <div class="cpanel" id="cp2" role="tabpanel" hidden>
+        <div class="cf">
+          <div class="fg"><label class="fl" for="c2a">Numatomas namo plotas</label>
+            <div class="rng"><input type="range" id="c2a" min="40" max="350" step="5" value="140"><span class="rv"><span id="c2av">140</span> <i>m²</i></span></div></div>
+          <div class="fg"><label class="fl">Konstrukcija</label>
+            <div class="opts c3">
+              <label class="opt"><input type="radio" name="c2k" value="0.9" checked><span>Karkasinis<small>Greičiau</small></span></label>
+              <label class="opt"><input type="radio" name="c2k" value="1"><span>Blokelių / mūrinis<small>Dažniausias</small></span></label>
+              <label class="opt"><input type="radio" name="c2k" value="1.12"><span>Monolitinis<small>Brangiau</small></span></label>
+            </div></div>
+          <div class="fg"><label class="fl">Iki kurio etapo?</label>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="c2b" value="850" data-m="4" checked><span>Pamatai, sienos ir stogas<small>Uždaras šiltas kontūras</small></span></label>
+              <label class="opt"><input type="radio" name="c2b" value="1320" data-m="8"><span>Dalinė apdaila<small>Langai, durys, inžinerija, lygios sienos</small></span></label>
+              <label class="opt"><input type="radio" name="c2b" value="1950" data-m="12"><span>Pilnai įrengtas<small>Galima gyventi</small></span></label>
+            </div></div>
+        </div>
+        <div class="co">
+          <span class="lab">Orientacinis biudžetas</span>
+          <div class="on1 rng2"><span id="c2lo">101 000</span> – <span id="c2hi">137 000</span> €</div>
+          <p class="osub">Apie <b id="c2m2">850</b> €/m² · Trukmė <b id="c2dur">4–6</b> mėn.</p>
+          <div class="bars">
+            <div class="bar"><b>Pamatai ir konstrukcijos <span id="b1">32%</span></b><div class="bar-t"><div class="bar-f" data-w="32"></div></div></div>
+            <div class="bar"><b>Stogas ir fasadas <span id="b2">21%</span></b><div class="bar-t"><div class="bar-f" data-w="21"></div></div></div>
+            <div class="bar"><b>Inžinerinės sistemos <span id="b3">22%</span></b><div class="bar-t"><div class="bar-f" data-w="22"></div></div></div>
+            <div class="bar"><b>Vidaus apdaila <span id="b4">25%</span></b><div class="bar-t"><div class="bar-f" data-w="25"></div></div></div>
+          </div>
+          <p class="disc">Orientaciniai rėžiai susiorientuoti. Realią kainą lemia sklypas, projektas ir sprendimai — juos įvertiname vietoje.</p>
+        </div>
+      </div>
+      <div class="cpanel" id="cp3" role="tabpanel" hidden>
+        <div class="cf">
+          <div class="fg"><label class="fl" for="c3a">Paveiktas plotas</label>
+            <div class="rng"><input type="range" id="c3a" min="4" max="180" step="2" value="28"><span class="rv"><span id="c3av">28</span> <i>m²</i></span></div></div>
+          <div class="fg"><label class="fl">Kas nutiko?</label>
+            <div class="opts c2">
+              <label class="opt"><input type="radio" name="c3t" value="130" checked><span>Užliejo iš viršaus<small>Kaimynai, stogas</small></span></label>
+              <label class="opt"><input type="radio" name="c3t" value="165"><span>Vamzdyno avarija<small>Trūko vamzdis</small></span></label>
+              <label class="opt"><input type="radio" name="c3t" value="340"><span>Gaisras ir suodžiai<small>Su kvapo šalinimu</small></span></label>
+              <label class="opt"><input type="radio" name="c3t" value="185"><span>Drėgmė ir pelėsis<small>Ilgalaikė problema</small></span></label>
+            </div></div>
+          <div class="fg"><label class="fl">Kokia buvo apdaila?</label>
+            <div class="opts c3">
+              <label class="opt"><input type="radio" name="c3f" value="0.78"><span>Paprasta</span></label>
+              <label class="opt"><input type="radio" name="c3f" value="1" checked><span>Vidutinė</span></label>
+              <label class="opt"><input type="radio" name="c3f" value="1.45"><span>Aukštesnė</span></label>
+            </div></div>
+        </div>
+        <div class="co">
+          <span class="lab">Orientacinė atstatymo kaina</span>
+          <div class="on1 rng2"><span id="c3lo">3 100</span> – <span id="c3hi">4 200</span> €</div>
+          <p class="osub">Apie <b id="c3m2">130</b> €/m² · darbai ir medžiagos, be baldų ir daiktų.</p>
+          <div class="orows">
+            <div class="orow"><span>Ardymas ir džiovinimas</span><b id="c3r1">—</b></div>
+            <div class="orow"><span>Medžiagos</span><b id="c3r2">—</b></div>
+            <div class="orow"><span>Apdailos atstatymas</span><b id="c3r3">—</b></div>
+          </div>
+          <p class="disc">Prieš pasirašydami susitarimą su draudiku, turėkite savo skaičius. Vietoje atliktas vertinimas dažnai atskleidžia paslėptą žalą.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec">
+  <div class="shell tst">
+    <span class="side r">Atsiliepimai</span>
+    <div class="tcards">
+      <div class="tc r"><div class="tc-top"><b>R</b><div class="rimg"><img src="https://images.pexels.com/photos/8727573/pexels-photo-8727573.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div></div>
+        <q>Sąmatoje radome dvigubai įtrauktą tinkavimą ir 4 000 € „smulkių darbų“. Rangovas pataisė be ginčų, kai parodžiau išvadas.</q>
+        <div class="who"><b>Rūta, Garliava</b><span>Sąmatos patikra · 150 €</span></div></div>
+      <div class="tc r"><div class="tc-top"><b>V</b><div class="rimg"><img src="https://images.pexels.com/photos/29819387/pexels-photo-29819387.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div></div>
+        <q>Prieš pirkdami sklypą pasikvietėme apžiūrai. Pasakė, kad reikės polinių pamatų — projektuotojas to nebuvo minėjęs.</q>
+        <div class="who"><b>Vytautas, Kaunas</b><span>Planavimas · 150 €</span></div></div>
+      <div class="tc r"><div class="tc-top"><b>D</b><div class="rimg"><img src="https://images.pexels.com/photos/9727699/pexels-photo-9727699.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div></div>
+        <q>Po užliejimo draudikas siūlė 1 200 €. Su eksperto įvertinimu gavome 3 800 €. Vizitas kainavo 200 €.</q>
+        <div class="who"><b>Danutė, Jonava</b><span>Žalos vertinimas · 200 €</span></div></div>
+    </div>
+    <span class="side r">Ką sako klientai</span>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="kainos" style="padding-top:0">
+  <div class="shell">
+    <span class="lab r">Kainos</span>
+    <h2 class="h2 r" style="margin:16px 0 40px;max-width:18ch">Viena kaina už vizitą. Jokių valandinių priedų.</h2>
+    <div class="prc">
+      <div class="pc hi r"><h3>Kaunas ir rajonas</h3><p>Kaunas, Garliava, Domeikava, Raudondvaris, Karmėlava, Ringaudai, Akademija ir aplinkinės vietovės.</p>
+        <div class="pn">150 <i>€ / vizitas</i></div>
+        <ul><li>Atvykimas į objektą arba pas jus namuose</li><li>1–2 val. apžiūra, matavimai, konsultacija</li><li>Sąmatos peržiūra eilutė po eilutės</li><li>Kiekių ir kainų skaičiavimai</li><li>Rizikų įvertinimas ir santrauka raštu</li></ul>
+        <a class="pill" href="#uzklausa">Užsakyti vizitą <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a></div>
+      <div class="pc r"><h3>Kiti Lietuvos miestai</h3><p>Vilnius, Klaipėda, Šiauliai, Panevėžys, Alytus, Marijampolė ir visa Lietuva.</p>
+        <div class="pn">200 <i>€ / vizitas</i></div>
+        <ul><li>Viskas, kas įskaičiuota Kaune</li><li>Kelionė — 50 €, nepriklausomai nuo atstumo</li><li>Atsiskaitymas po susitikimo — grynais ar pavedimu</li><li>Kelis objektus tame pačiame mieste aptariame atskirai</li></ul>
+        <a class="pill ol" href="#uzklausa">Užsakyti vizitą <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- WIZARD -->
+<section class="sec" id="uzklausa" style="background:var(--bg-2)">
+  <div class="shell">
+    <div style="text-align:center;max-width:640px;margin:0 auto clamp(36px,5vw,60px)">
+      <span class="lab r">Užklausa</span>
+      <h2 class="h2 r" style="margin:16px 0 14px">Penki paprasti klausimai. Toliau pasirūpiname mes.</h2>
+      <p class="mute r">Vienu metu — vienas klausimas, be statybinių terminų. Jei patogiau, paskambinkite — užpildysime kartu telefonu.</p>
+    </div>
+    <div class="wiz r">
+      <div class="wtop">
+        <div class="wprog"><b id="wlab">1 žingsnis iš 5 · Kuo galime padėti?</b><div class="wbar"><i id="wbar"></i></div></div>
+        <a class="wtel" href="tel:+37060131453">Arba skambinkite: <b>+370 601 31453</b></a>
+      </div>
+      <form class="wbody" id="wform" novalidate>
+        <div class="wstep on" data-s="1">
+          <h3>Kuo galime jums padėti?</h3><p class="wsub">Pasirinkite, kas geriausiai apibūdina jūsų situaciją. Jei tinka keli — svarbiausią, likusius aptarsime vietoje.</p>
+          <div class="bopts">
+            <label class="bopt"><input type="radio" name="w1" value="Nežinau nuo ko pradėti statybas" checked><span><em>01</em><span>Planuoju statytis ir nežinau nuo ko pradėti<small>Darbų seka, medžiagų kiekiai, realus biudžetas</small></span></span></label>
+            <label class="bopt"><input type="radio" name="w1" value="Sąmatos patikrinimas"><span><em>02</em><span>Turiu sąmatą ir noriu ją patikrinti<small>Ar kainos ir terminai logiški, ar niekas nedubliuojama</small></span></span></label>
+            <label class="bopt"><input type="radio" name="w1" value="Darbų kokybės įvertinimas"><span><em>03</em><span>Darbai vyksta — ar daroma teisingai?<small>Kokybės ir technologijos patikra objekte</small></span></span></label>
+            <label class="bopt"><input type="radio" name="w1" value="Draudiminis įvykis / žala"><span><em>04</em><span>Įvyko draudiminis įvykis arba patyriau žalą<small>Žalos mastas ir sutvarkymo kaina</small></span></span></label>
+          </div>
+        </div>
+        <div class="wstep" data-s="2">
+          <h3>Kur yra objektas?</h3><p class="wsub">Nuo vietovės priklauso tik kelionės mokestis. Pati paslauga visur kainuoja vienodai.</p>
+          <div class="bopts c2">
+            <label class="bopt"><input type="radio" name="w2" value="Kaunas ir Kauno regionas" data-p="150" checked><span><em>K</em><span>Kaunas arba Kauno rajonas<small>150 €</small></span></span></label>
+            <label class="bopt"><input type="radio" name="w2" value="Kitas Lietuvos miestas" data-p="200"><span><em>LT</em><span>Kitas Lietuvos miestas<small>200 € su kelione</small></span></span></label>
+          </div>
+          <label class="fl" style="margin-top:24px" for="w2c">Miestas arba vietovė <s>— nebūtina</s></label>
+          <input class="fin" id="w2c" type="text" placeholder="Pavyzdžiui: Garliava, Vilnius…" autocomplete="address-level2">
+          <div class="plive"><span>Numatoma paslaugos kaina</span><b id="wprice">150 €</b></div>
+        </div>
+        <div class="wstep" data-s="3">
+          <h3>Koks tai objektas?</h3><p class="wsub">Kaina nuo to nesikeičia — tiesiog norime žinoti, ko tikėtis atvykę.</p>
+          <div class="bopts c2">
+            <label class="bopt"><input type="radio" name="w3" value="Gyvenamasis namas" checked><span><span>Gyvenamasis namas</span></span></label>
+            <label class="bopt"><input type="radio" name="w3" value="Butas"><span><span>Butas daugiabutyje</span></span></label>
+            <label class="bopt"><input type="radio" name="w3" value="Sodo namas"><span><span>Sodo namas</span></span></label>
+            <label class="bopt"><input type="radio" name="w3" value="Sklypas be statinių"><span><span>Sklypas, dar be statinių</span></span></label>
+            <label class="bopt"><input type="radio" name="w3" value="Komercinės patalpos"><span><span>Komercinės patalpos</span></span></label>
+            <label class="bopt"><input type="radio" name="w3" value="Kita"><span><span>Kita</span></span></label>
+          </div>
+        </div>
+        <div class="wstep" data-s="4">
+          <h3>Kada jums patogu susitikti?</h3><p class="wsub">Tik pageidavimas — tikslų laiką suderinsime telefonu.</p>
+          <div class="bopts c2">
+            <label class="bopt"><input type="radio" name="w4" value="Kuo greičiau" checked><span><span>Kuo greičiau<small>Klausimas neatidėliotinas</small></span></span></label>
+            <label class="bopt"><input type="radio" name="w4" value="Šią savaitę"><span><span>Šią savaitę<small>Bet kuri diena tiktų</small></span></span></label>
+            <label class="bopt"><input type="radio" name="w4" value="Kitą savaitę"><span><span>Kitą savaitę<small>Neskubu, planuoju iš anksto</small></span></span></label>
+            <label class="bopt"><input type="radio" name="w4" value="Dar nežinau"><span><span>Dar nežinau<small>Pirma norėčiau pasitarti telefonu</small></span></span></label>
+          </div>
+        </div>
+        <div class="wstep" data-s="5">
+          <h3>Kaip su jumis susisiekti?</h3><p class="wsub">Perskambinsime tą pačią arba kitą darbo dieną. Jokių naujienlaiškių — tik dėl jūsų užklausos.</p>
+          <div class="f2">
+            <div><label class="fl" for="wn">Jūsų vardas</label><input class="fin" id="wn" type="text" placeholder="Vardas" autocomplete="given-name" required></div>
+            <div><label class="fl" for="wt">Telefono numeris</label><input class="fin" id="wt" type="tel" placeholder="+370 6__ _____" autocomplete="tel" required inputmode="tel"></div>
+          </div>
+          <div class="err" id="werr">Prašome įrašyti vardą ir telefono numerį — kitaip negalėsime perskambinti.</div>
+          <label class="fl" style="margin-top:22px" for="wm">Trumpai aprašykite situaciją <s>— nebūtina</s></label>
+          <textarea class="fin" id="wm" placeholder="Pavyzdžiui: gavau sąmatą 68 000 € už namą iki dalinės apdailos, noriu žinoti, ar tai normali kaina."></textarea>
+          <label class="chk"><input type="checkbox" id="wa" checked> Sutinku, kad su manimi būtų susisiekta dėl šios užklausos. Duomenų niekam neperduodame.</label>
+        </div>
+        <div class="wstep" data-s="6">
+          <h3>Patikrinkite ir patvirtinkite</h3><p class="wsub">Jei kažkas ne taip — spauskite „Atgal“ ir pataisykite.</p>
+          <div class="summ" id="wsumm"></div>
+          <label class="chk"><input type="checkbox" checked disabled> Užklausa nieko neįpareigoja. Kainą patvirtinsime telefonu prieš atvykdami.</label>
+        </div>
+        <div class="wstep" data-s="7">
+          <div class="done">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+            <h3>Ačiū! Užklausa gauta.</h3>
+            <p class="wsub" style="margin-inline:auto">Perskambinsime tą pačią arba kitą darbo dieną. Jei skubu — paskambinkite patys, atsiliepsime iš karto.</p>
+            <a class="pill big" href="tel:+37060131453">Skambinti +370 601 31453 <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
+            <p style="margin-top:24px;font-size:.84rem;color:var(--mute)">Demonstracinė forma — užklausa niekur nesiunčiama.</p>
+          </div>
+        </div>
+        <div class="wnav" id="wnav">
+          <button type="button" class="wback" id="wback" hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg> Atgal</button>
+          <button type="button" class="pill big" id="wnext"><span>Toliau</span> <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></button>
+          <p class="whelp">Nepatogu pildyti? Paskambinkite <a class="ul" href="tel:+37060131453">+370 601 31453</a> — užpildysime kartu telefonu.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="duk">
+  <div class="shell">
+    <span class="lab r">D.U.K.</span>
+    <h2 class="h2 r" style="margin:16px 0 40px">Dažniausiai klausia</h2>
+    <div class="faq r">
+      <div class="qa"><button class="qq" type="button">Ar jūs patys statote arba remontuojate?<i></i></button><div class="qa-a"><p>Ne. Tik vertiname ir konsultuojame. Būtent todėl galime kalbėti atvirai — neturime jokio intereso, kad darbai kainuotų brangiau ar kad juos atliktų kas nors konkretus.</p></div></div>
+      <div class="qa"><button class="qq" type="button">Ar rekomenduosite meistrus ar parduotuves?<i></i></button><div class="qa-a"><p>Ne, ir tai sąmoningas sprendimas. Kai ekspertas siunčia jus į „savo“ parduotuvę ar pas „savo“ brigadą, jis nustoja būti nepriklausomas. Pasakome, kokių medžiagų reikia ir kokia jų rinkos kaina — kur pirkti ir ką samdyti, sprendžiate jūs.</p></div></div>
+      <div class="qa"><button class="qq" type="button">Kiek trunka susitikimas?<i></i></button><div class="qa-a"><p>Paprastai 1–2 valandas, priklausomai nuo objekto ir klausimų. Kaina dėl to nesikeičia — skiriame tiek laiko, kiek reikia klausimui išsiaiškinti iki galo.</p></div></div>
+      <div class="qa"><button class="qq" type="button">Dar neturiu nei sklypo, nei projekto. Ar verta kviesti?<i></i></button><div class="qa-a"><p>Taip — tai pigiausias momentas klysti. Susitinkame pas jus arba apžiūrime svarstomą sklypą: kiek realiai kainuos sumanymas, kokia darbų seka laukia ir į ką atkreipti dėmesį dar prieš perkant sklypą ar užsakant projektą.</p></div></div>
+      <div class="qa"><button class="qq" type="button">Ką gaunu po susitikimo?<i></i></button><div class="qa-a"><p>Santrauką raštu: išvadas, skaičius, pastebėtas rizikas ir siūlomus žingsnius. Rašome paprasta kalba, be žargono, kad galėtumėte perskaityti ramiai ir aptarti su artimaisiais.</p></div></div>
+      <div class="qa"><button class="qq" type="button">Įvyko draudiminis įvykis — ką daryti pirmiausia?<i></i></button><div class="qa-a"><p>Nufotografuokite viską, kas pažeista, ir kol kas nieko negriaukite bei neišmeskite. Tada skambinkite — atvykę užfiksuosime žalos mastą ir suskaičiuosime realią sutvarkymo kainą. Su savo skaičiais pokalbis su draudiku vyksta visai kitaip.</p></div></div>
+      <div class="qa"><button class="qq" type="button">Kaip atsiskaityti?<i></i></button><div class="qa-a"><p>Po susitikimo — grynaisiais vietoje arba pavedimu. Išrašome sąskaitą. Avanso neimame.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA + FOOTER -->
+<section class="fcta">
+  <div class="shell">
+    <p class="r">Norite pradėti? <a href="tel:+37060131453">Paskambinkite</a> arba <a href="#uzklausa">užpildykite užklausą</a>.</p>
+    <div class="row r">
+      <a class="pill big" href="tel:+37060131453">+370 601 31453 <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
+      <a class="pill ol big" href="mailto:info@statybuivertinimas.lt">info@statybuivertinimas.lt <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="ftr">
+  <div class="shell ftr-in">
+    <span>© 2026 statybuivertinimas.lt · I–V 8:00–20:00, VI 9:00–15:00</span>
+    <nav><a href="#apie">Apie</a><a href="#paslaugos">Paslaugos</a><a href="#kainos">Kainos</a><a href="#duk">D.U.K.</a></nav>
+    <span>Nuotraukos ir video — Pexels · Demonstracinis maketas</span>
+  </div>
+  <div class="wmk" aria-hidden="true"><span>Statybų įvertinimas</span></div>
+</footer>
+<div class="callbar"><a href="tel:+37060131453"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Skambinti</a><a href="#uzklausa">Užklausa</a></div>
+
+<style>section[id]{scroll-margin-top:80px}</style>
+<script>
+(function(){
+"use strict";
+var $=function(s,c){return (c||document).querySelector(s)},
+    $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))},
+    RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    eur=function(n){return Math.round(n).toLocaleString('lt-LT').replace(/ /g,' ')},
+    r50=function(n){return Math.round(n/50)*50}, r500=function(n){return Math.round(n/500)*500};
+
+/* ticker: duplicate for seamless loop */
+var tk=$('#tick'); tk.innerHTML+=tk.innerHTML;
+
+/* header */
+var hdr=$('#hdr'); function onS(){hdr.classList.toggle('stuck',window.scrollY>40)} onS(); window.addEventListener('scroll',onS,{passive:true});
+var bg=$('#burger'),mn=$('#mnav');
+bg.addEventListener('click',function(){var on=mn.classList.toggle('on');bg.classList.toggle('on',on);bg.setAttribute('aria-expanded',on);document.body.style.overflow=on?'hidden':''});
+$$('#mnav a').forEach(function(a){a.addEventListener('click',function(){mn.classList.remove('on');bg.classList.remove('on');document.body.style.overflow=''})});
+
+/* videos: respect reduced motion; lazy-load secondary */
+if(RM){$$('video').forEach(function(v){v.removeAttribute('autoplay');v.pause()})}
+else{
+  var hv=$('#hv'); if(hv){hv.addEventListener('canplay',function(){hv.style.opacity=1}); hv.play().catch(function(){})}
+  var lv=$('video[data-src]');
+  if(lv&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){lv.src=lv.dataset.src;lv.play().catch(function(){});o.disconnect()}})},{rootMargin:'300px'}).observe(lv);
+  }
+}
+
+/* reveal */
+if('IntersectionObserver' in window && !RM){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target,sibs=$$('.r',el.parentNode),i=sibs.indexOf(el);
+    el.style.transitionDelay=(i>0?Math.min(i,5)*90:0)+'ms';el.classList.add('seen');io.unobserve(el)})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  $$('.r').forEach(function(el){io.observe(el)});
+}else{$$('.r').forEach(function(e){e.classList.add('seen')})}
+
+/* horizontal panels */
+var hz=$('.hz'),tr=$('#hztr'),mq=window.matchMedia('(max-width:900px)');
+function hzTick(){
+  if(RM||mq.matches){tr.style.transform='';return}
+  var top=hz.getBoundingClientRect().top+window.scrollY, h=hz.offsetHeight-window.innerHeight;
+  var p=Math.min(1,Math.max(0,(window.scrollY-top)/h));
+  var max=tr.scrollWidth-window.innerWidth;
+  tr.style.transform='translate3d('+(-p*max)+'px,0,0)';
+}
+var hzRaf=false; window.addEventListener('scroll',function(){if(!hzRaf){hzRaf=true;requestAnimationFrame(function(){hzTick();hzRaf=false})}},{passive:true});
+window.addEventListener('resize',hzTick); hzTick();
+
+/* sky statement: word-by-word */
+var st=$('#skystmt'); st.innerHTML=st.textContent.split(' ').map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+var ws=$$('#skystmt .w');
+function skyTick(){
+  var r=st.getBoundingClientRect(), vh=window.innerHeight;
+  var p=Math.min(1,Math.max(0,(vh*0.85-r.top)/(vh*0.55)));
+  var n=Math.round(p*ws.length); ws.forEach(function(w,i){w.classList.toggle('on',i<n)});
+}
+if(RM){ws.forEach(function(w){w.classList.add('on')})}else{window.addEventListener('scroll',skyTick,{passive:true});skyTick()}
+
+/* FAQ */
+$$('.qq').forEach(function(b){b.setAttribute('aria-expanded','false');b.addEventListener('click',function(){
+  var qa=b.parentNode,a=$('.qa-a',qa),open=qa.classList.contains('on');
+  $$('.qa.on').forEach(function(o){o.classList.remove('on');$('.qa-a',o).style.maxHeight=null;$('.qq',o).setAttribute('aria-expanded','false')});
+  if(!open){qa.classList.add('on');a.style.maxHeight=a.scrollHeight+'px';b.setAttribute('aria-expanded','true')}})});
+
+/* calculators */
+var tabs=$$('.ctab');
+tabs.forEach(function(t,i){t.addEventListener('click',function(){
+  tabs.forEach(function(x){x.setAttribute('aria-selected','false')});t.setAttribute('aria-selected','true');
+  $$('.cpanel').forEach(function(p,j){var on=i===j;p.classList.toggle('on',on);if(on)p.removeAttribute('hidden');else p.setAttribute('hidden','')});
+  if(i===1)$$('#cp2 .bar-f').forEach(function(b){b.style.width=(b.dataset.w||0)+'%'})})});
+function calc1(){var p=+$('input[name="c1reg"]:checked').value;$('#c1sum').textContent=p;$('#c1tot').textContent=p+' €';
+  $('#c1trip').textContent=p>150?'+50 €':'netaikoma';
+  $('#c1note').textContent=p>150?'Į kainą įskaičiuotas 50 € kelionės mokestis už Kauno regiono ribų. Daugiau priedų nėra.':'Kaina galutinė. Nepriklauso nei nuo objekto dydžio, nei nuo susitikimo trukmės.'}
+$$('input[name="c1reg"]').forEach(function(i){i.addEventListener('change',calc1)});calc1();
+var DIST={'850':[52,34,9,5],'1320':[34,23,25,18],'1950':[26,17,22,35]};
+function calc2(){var a=+$('#c2a').value,k=+$('input[name="c2k"]:checked').value,bEl=$('input[name="c2b"]:checked'),base=+bEl.value,mo=+bEl.dataset.m;
+  $('#c2av').textContent=a;var mid=a*base*k;$('#c2lo').textContent=eur(r500(mid*.88));$('#c2hi').textContent=eur(r500(mid*1.15));$('#c2m2').textContent=eur(r50(base*k));
+  var m=mo*(k<1?.8:(k>1?1.15:1));$('#c2dur').textContent=Math.round(m)+'–'+Math.round(m*1.5);
+  var d=DIST[bEl.value];[1,2,3,4].forEach(function(n,i){$('#b'+n).textContent=d[i]+'%'});$$('#cp2 .bar-f').forEach(function(b,i){b.dataset.w=d[i];b.style.width=d[i]+'%'})}
+$('#c2a').addEventListener('input',calc2);$$('input[name="c2k"],input[name="c2b"]').forEach(function(i){i.addEventListener('change',calc2)});calc2();
+function calc3(){var a=+$('#c3a').value,t=+$('input[name="c3t"]:checked').value,f=+$('input[name="c3f"]:checked').value;$('#c3av').textContent=a;
+  var rate=t*f,mid=a*rate;$('#c3lo').textContent=eur(r50(mid*.85));$('#c3hi').textContent=eur(r50(mid*1.18));$('#c3m2').textContent=eur(rate);
+  $('#c3r1').textContent=eur(Math.round(mid*.28/10)*10)+' €';$('#c3r2').textContent=eur(Math.round(mid*.30/10)*10)+' €';$('#c3r3').textContent=eur(Math.round(mid*.42/10)*10)+' €'}
+$('#c3a').addEventListener('input',calc3);$$('input[name="c3t"],input[name="c3f"]').forEach(function(i){i.addEventListener('change',calc3)});calc3();
+
+/* wizard */
+var W={s:1},T={1:'Kuo galime padėti?',2:'Kur yra objektas?',3:'Koks tai objektas?',4:'Kada susitikti?',5:'Jūsų kontaktai'},
+    wnext=$('#wnext'),wback=$('#wback'),wbar=$('#wbar'),wlab=$('#wlab'),wnav=$('#wnav');
+function price(){return +$('input[name="w2"]:checked').getAttribute('data-p')}
+$$('input[name="w2"]').forEach(function(i){i.addEventListener('change',function(){$('#wprice').textContent=price()+' €'})});
+function show(n,scroll){W.s=n;$$('.wstep').forEach(function(s){s.classList.toggle('on',+s.dataset.s===n)});
+  wbar.style.width=Math.min(100,n/5*100)+'%';
+  wlab.textContent=n<=5?(n+' žingsnis iš 5 · '+T[n]):(n===6?'Beveik baigta · Patikrinkite užklausą':'Užklausa pateikta');
+  wback.hidden=(n===1||n===7);wnav.style.display=n===7?'none':'';
+  $('span',wnext).textContent=n===5?'Peržiūrėti užklausą':(n===6?'Patvirtinti užklausą':'Toliau');
+  if(n===6)summary();
+  if(scroll){window.scrollTo({top:$('.wiz').getBoundingClientRect().top+window.scrollY-90,behavior:RM?'auto':'smooth'})}}
+function val(n){var e=$('input[name="w'+n+'"]:checked');return e?e.value:'—'}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function summary(){var city=$('#w2c').value.trim(),msg=$('#wm').value.trim();
+  var rows=[['Su kuo reikia pagalbos',val(1)],['Objekto vietovė',val(2)+(city?' · '+city:'')],['Objekto tipas',val(3)],['Pageidaujamas laikas',val(4)],['Vardas',$('#wn').value.trim()||'—'],['Telefonas',$('#wt').value.trim()||'—']];
+  if(msg)rows.push(['Situacija',msg]);
+  $('#wsumm').innerHTML=rows.map(function(r){return '<div class="sr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>'}).join('')+'<div class="sr tot"><span>Paslaugos kaina</span><b>'+price()+' €</b></div>'}
+wnext.addEventListener('click',function(){
+  if(W.s===5){var n=$('#wn').value.trim(),t=$('#wt').value.trim().replace(/[\s\-()]/g,'');var ok=n.length>1&&/^(\+?370|8)\d{7,8}$/.test(t);
+    $('#werr').classList.toggle('on',!ok);if(!ok){(n.length>1?$('#wt'):$('#wn')).focus();return}}
+  if(W.s===6){show(7,true);return} if(W.s<6)show(W.s+1,true)});
+wback.addEventListener('click',function(){if(W.s>1)show(W.s-1,true)});
+$('#wform').addEventListener('submit',function(e){e.preventDefault()});
+var ptr=false;document.addEventListener('pointerdown',function(){ptr=true},true);document.addEventListener('keydown',function(){ptr=false},true);
+$$('.bopts .bopt input').forEach(function(i){i.addEventListener('change',function(){if(ptr&&W.s<=4&&!RM)setTimeout(function(){if(W.s<5)show(W.s+1,true)},280)})});
+['#wn','#wt'].forEach(function(s){$(s).addEventListener('input',function(){$('#werr').classList.remove('on')})});
+show(1,false);
+
+/* anchors */
+$$('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length<2)return;var t=document.getElementById(id.slice(1));if(!t)return;
+  e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-(id==='#top'?400:70),behavior:RM?'auto':'smooth'})})});
+})();
+</script>
+</body>
+</html>
