@@ -1,4 +1,4 @@
-# statybuivertinimas.lt — demo maketas (v2, Harbor kryptis)
+# statybuivertinimas.lt — svetainė (statinė versija, Harbor kryptis)
 
 Vienas savarankiškas failas: **`index.html`**. Atidaryti dukart spustelėjus arba `open index.html`.
 Ankstesnė tamsi versija (jurkas.lt kryptis) palikta kaip `index-v1.html`.
@@ -47,8 +47,17 @@ Spalvos: `#E4522E` terakota, `#F5A800` gintaras, `#8FC4F0` dangus, `#EFE9DD` sm�
 
 ## Prieš paleidžiant
 
-- Formos siuntimas (Netlify Forms / Formspree / el. paštas)
+- Užklausa statinėje versijoje atidaro el. laišką (mailto) su santrauka; WordPress versija siunčia per įskiepį (`../statybuivertinimas-wp`)
 - Pexels nuotraukas atsisiųsti ir talpinti savo serveryje (dabar kraunamos iš Pexels CDN)
-- Statistikos skaičiai (340+, 11 %, 1 d.d.) ir atsiliepimai — demo tekstas, pakeisti tikrais
+- Statistikos skaičiai ir atsiliepimai — patikslinti tikrais duomenimis
 - Skaičiuoklių koeficientai — patikslinti pagal praktiką
 - Privatumo politika, slapukų juosta, jei bus analitika
+
+## Privatumas ir slapukai
+
+- `privatumo-politika.html` — bendrinė BDAR privatumo politika.
+- Slapukų pranešimas: „Sutinku su visais“ / „Tik būtini“, pasirinkimas — `localStorage.cookie_consent`; analitika (`loadAnalytics()`) vykdoma tik sutikus su visais.
+
+## WordPress versija
+
+Salient temai skirta versija (Docker, child tema, įskiepis su skaičiuoklėmis, užklausa ir slapukais) — `../statybuivertinimas-wp`.

@@ -321,6 +321,13 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
 .callbar a:first-child{background:var(--terra)}
 .callbar svg{width:15px;height:15px}
 
+/* cookie notice */
+.ck{position:fixed;left:18px;bottom:18px;z-index:70;max-width:430px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:0 24px 60px -24px rgba(0,0,0,.4)}
+.ck p{font-size:.92rem;line-height:1.5;color:var(--ink-2);margin-bottom:14px}
+.ck p a{text-decoration:underline;text-underline-offset:4px}
+.ck-b{display:flex;gap:8px;flex-wrap:wrap}
+.ck .pill{padding:10px 18px;font-size:.88rem;cursor:pointer}
+@media(max-width:900px){.ck{left:12px;right:12px;bottom:66px;max-width:none}}
 /* reveal */
 .r{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .r.seen{opacity:1;transform:none}
@@ -760,10 +767,9 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
         <div class="wstep" data-s="7">
           <div class="done">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
-            <h3>Ačiū! Užklausa gauta.</h3>
-            <p class="wsub" style="margin-inline:auto">Perskambinsime tą pačią arba kitą darbo dieną. Jei skubu — paskambinkite patys, atsiliepsime iš karto.</p>
+            <h3>Užklausa paruošta</h3>
+            <p class="wsub" style="margin-inline:auto">Atsidarė jūsų el. pašto programa su užpildyta užklausa — tereikia paspausti „Siųsti“. Perskambinsime tą pačią arba kitą darbo dieną. Jei programa neatsidarė, paskambinkite arba parašykite <a class="ul" href="mailto:info@statybuivertinimas.lt">info@statybuivertinimas.lt</a>.</p>
             <a class="pill big" href="tel:+37063965375">Skambinti +370 639 65375 <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
-            <p style="margin-top:24px;font-size:.84rem;color:var(--mute)">Demonstracinė forma — užklausa niekur nesiunčiama.</p>
           </div>
         </div>
         <div class="wnav" id="wnav">
@@ -809,10 +815,14 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
   <div class="shell ftr-in">
     <div class="ftr-brand"><a href="#top" class="logo" aria-label="Statybų įvertinimas — pradžia"><svg class="lg-mk" viewBox="0 0 200 190" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M100 0 200 75V94H188V190H12V94H0V75ZM100 21 29 74v99h142V74Z"/><path d="M52 118 85 154 156 82" fill="none" stroke="var(--terra)" stroke-width="25" stroke-linejoin="round"/></svg><span class="lg-tx">Statybų<br>įvertinimas</span></a><span>© 2026 statybuivertinimas.lt · Redas Kimantas · I–V 8:00–20:00, VI 9:00–15:00</span></div>
     <nav><a href="#apie">Apie</a><a href="#paslaugos">Paslaugos</a><a href="#kainos">Kainos</a><a href="#duk">D.U.K.</a></nav>
-    <span>Nuotraukos ir video — Pexels · Demonstracinis maketas</span>
+    <a class="ul" href="privatumo-politika.html">Privatumo politika</a>
   </div>
   <div class="wmk" aria-hidden="true"><span>Statybų įvertinimas</span></div>
 </footer>
+<div class="ck" id="ck" hidden role="dialog" aria-label="Slapukų pranešimas">
+  <p>Naudojame būtinuosius slapukus, kad svetainė veiktų. Analitinius slapukus įjungsime tik jums sutikus. <a href="privatumo-politika.html#slapukai">Privatumo politika</a></p>
+  <div class="ck-b"><button type="button" class="pill" id="ck-all">Sutinku su visais</button><button type="button" class="pill ol" id="ck-ess">Tik būtini</button></div>
+</div>
 <div class="callbar"><a href="tel:+37063965375"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Skambinti</a><a href="#uzklausa">Užklausa</a></div>
 
 <style>section[id]{scroll-margin-top:80px}</style>
@@ -921,13 +931,26 @@ function summary(){var city=$('#w2c').value.trim(),msg=$('#wm').value.trim();
 wnext.addEventListener('click',function(){
   if(W.s===5){var n=$('#wn').value.trim(),t=$('#wt').value.trim().replace(/[\s\-()]/g,'');var ok=n.length>1&&/^(\+?370|8)\d{7,8}$/.test(t);
     $('#werr').classList.toggle('on',!ok);if(!ok){(n.length>1?$('#wt'):$('#wn')).focus();return}}
-  if(W.s===6){show(7,true);return} if(W.s<6)show(W.s+1,true)});
+  if(W.s===6){
+    var city=$('#w2c').value.trim(),msg=$('#wm').value.trim();
+    var lines=['Su kuo reikia pagalbos: '+val(1),'Vietovė: '+val(2)+(city?' · '+city:''),'Objektas: '+val(3),'Laikas: '+val(4),'Vardas: '+$('#wn').value.trim(),'Telefonas: '+$('#wt').value.trim(),'Kaina: '+price()+' €'];
+    if(msg)lines.push('','Situacija: '+msg);
+    window.location.href='mailto:info@statybuivertinimas.lt?subject='+encodeURIComponent('Užklausa iš statybuivertinimas.lt — '+$('#wn').value.trim())+'&body='+encodeURIComponent(lines.join('\n'));
+    show(7,true);return}
+  if(W.s<6)show(W.s+1,true)});
 wback.addEventListener('click',function(){if(W.s>1)show(W.s-1,true)});
 $('#wform').addEventListener('submit',function(e){e.preventDefault()});
 var ptr=false;document.addEventListener('pointerdown',function(){ptr=true},true);document.addEventListener('keydown',function(){ptr=false},true);
 $$('.bopts .bopt input').forEach(function(i){i.addEventListener('change',function(){if(ptr&&W.s<=4&&!RM)setTimeout(function(){if(W.s<5)show(W.s+1,true)},280)})});
 ['#wn','#wt'].forEach(function(s){$(s).addEventListener('input',function(){$('#werr').classList.remove('on')})});
 show(1,false);
+
+/* cookie consent */
+var ck=$('#ck'),cc=null;try{cc=localStorage.getItem('cookie_consent')}catch(e){}
+function loadAnalytics(){/* čia įdėkite GA4 / Meta Pixel kodą — bus vykdomas tik sutikus su visais slapukais */}
+function consent(v){try{localStorage.setItem('cookie_consent',v)}catch(e){}ck.hidden=true;if(v==='all')loadAnalytics()}
+if(!cc){ck.hidden=false}else if(cc==='all'){loadAnalytics()}
+$('#ck-all').addEventListener('click',function(){consent('all')});$('#ck-ess').addEventListener('click',function(){consent('essential')});
 
 /* anchors */
 $$('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length<2)return;var t=document.getElementById(id.slice(1));if(!t)return;
