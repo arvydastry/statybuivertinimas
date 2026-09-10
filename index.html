@@ -8,13 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E4522E'/%3E%3Cpath d='M9 22V11l7-5 7 5v11' stroke='%23fff' stroke-width='2.2' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Poppins:wght@700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23111'/%3E%3Cg transform='translate(8 9) scale(.24)'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M100 0 200 75V94H188V190H12V94H0V75ZM100 21 29 74v99h142V74Z'/%3E%3Cpath d='M52 118 85 154 156 82' fill='none' stroke='%23F04A22' stroke-width='26' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
 <style>
 :root{
   --ink:#1B1B1B;--ink-2:#3B3B3B;--mute:#6F6F6F;--line:#E7E5E1;--line-2:#D6D3CD;
   --bg:#FFFFFF;--bg-2:#F6F5F2;--sand:#EFE9DD;
-  --terra:#E4522E;--amber:#F5A800;--sky:#8FC4F0;
+  --terra:#F04A22;--amber:#F5A800;--sky:#8FC4F0;
   --r:16px;--ease:cubic-bezier(.22,.61,.36,1);
   --shell:min(1320px,calc(100% - 48px));
   --font:"Inter Tight",Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
@@ -72,7 +72,11 @@ p{margin:0}
 .hdr.stuck{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);color:var(--ink);border-bottom-color:var(--line)}
 .hdr-in{height:84px;display:flex;align-items:center;gap:32px}
 .hdr.stuck .hdr-in{height:68px}
-.wm{font-weight:500;font-size:1.12rem;letter-spacing:-.025em;flex:none}
+.logo{display:inline-flex;align-items:center;gap:10px;flex:none;color:inherit}
+.lg-mk{width:38px;height:36px;flex:none;transition:width .35s var(--ease),height .35s var(--ease)}
+.lg-tx{font-family:Poppins,var(--font);font-weight:700;font-size:15px;line-height:.98;letter-spacing:-.02em;white-space:nowrap}
+.hdr.stuck .lg-mk{width:32px;height:30px}
+.hdr.stuck .lg-tx{font-size:13.5px}
 .nav{display:flex;gap:26px;margin-left:auto;font-size:.92rem}
 .nav a{opacity:.85;transition:opacity .25s}.nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
 .hdr-tel{font-size:.92rem;font-weight:500;flex:none;display:inline-flex;align-items:center;gap:8px}
@@ -306,7 +310,9 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
 .fcta .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 .ftr{border-top:1px solid var(--line);padding-top:26px;position:relative;overflow:hidden}
 .ftr-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:.86rem;color:var(--mute);align-items:center}
-.ftr-in nav{display:flex;gap:18px}.ftr-in a:hover{color:var(--ink)}
+.ftr-in nav{display:flex;gap:18px}
+.ftr-brand{display:flex;align-items:center;gap:18px;color:var(--ink)}
+.ftr-brand>span{color:var(--mute)}.ftr-in a:hover{color:var(--ink)}
 .ftr-in .soc{display:flex;gap:14px}.ftr-in .soc svg{width:16px;height:16px}
 .wmk{margin-top:46px;height:clamp(90px,15vw,240px);overflow:hidden;position:relative;background:radial-gradient(60% 120% at 50% 100%,rgba(228,82,46,.55),rgba(245,168,0,.25) 45%,transparent 75%)}
 .wmk span{position:absolute;left:50%;bottom:-.24em;transform:translateX(-50%);font-size:clamp(84px,11.2vw,190px);letter-spacing:-.05em;line-height:1;white-space:nowrap;color:var(--ink)}
@@ -347,6 +353,8 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
   .qa-a p{padding-right:20px}
   .callbar{display:grid}body{padding-bottom:54px}
   .hdr-tel span{display:none}
+  .lg-tx{font-size:14px}
+  .ftr-brand{flex-direction:column;align-items:flex-start;gap:12px}
   .wmk span{font-size:15vw}
 }
 @media(prefers-reduced-motion:reduce){
@@ -365,7 +373,7 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
 
 <header class="hdr" id="hdr">
   <div class="shell hdr-in">
-    <a href="#top" class="wm">Statybų įvertinimas</a>
+    <a href="#top" class="logo" aria-label="Statybų įvertinimas — pradžia"><svg class="lg-mk" viewBox="0 0 200 190" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M100 0 200 75V94H188V190H12V94H0V75ZM100 21 29 74v99h142V74Z"/><path d="M52 118 85 154 156 82" fill="none" stroke="var(--terra)" stroke-width="25" stroke-linejoin="round"/></svg><span class="lg-tx">Statybų<br>įvertinimas</span></a>
     <nav class="nav" aria-label="Meniu">
       <a href="#apie">Apie</a><a href="#paslaugos">Paslaugos</a><a href="#kaip">Kaip vyksta</a><a href="#skaiciuokles">Skaičiuoklės</a><a href="#kainos">Kainos</a><a href="#duk">D.U.K.</a>
     </nav>
@@ -788,7 +796,7 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
 </main>
 <footer class="ftr">
   <div class="shell ftr-in">
-    <span>© 2026 statybuivertinimas.lt · I–V 8:00–20:00, VI 9:00–15:00</span>
+    <div class="ftr-brand"><a href="#top" class="logo" aria-label="Statybų įvertinimas — pradžia"><svg class="lg-mk" viewBox="0 0 200 190" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M100 0 200 75V94H188V190H12V94H0V75ZM100 21 29 74v99h142V74Z"/><path d="M52 118 85 154 156 82" fill="none" stroke="var(--terra)" stroke-width="25" stroke-linejoin="round"/></svg><span class="lg-tx">Statybų<br>įvertinimas</span></a><span>© 2026 statybuivertinimas.lt · I–V 8:00–20:00, VI 9:00–15:00</span></div>
     <nav><a href="#apie">Apie</a><a href="#paslaugos">Paslaugos</a><a href="#kainos">Kainos</a><a href="#duk">D.U.K.</a></nav>
     <span>Nuotraukos ir video — Pexels · Demonstracinis maketas</span>
   </div>

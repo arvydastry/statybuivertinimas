@@ -33,6 +33,10 @@ Spalvos: `#E4522E` terakota, `#F5A800` gintaras, `#8FC4F0` dangus, `#EFE9DD` sm�
 - Antraštės lengvu svoriu, dideli tarpai, skliaustinės etiketės — redakcinis, ne „SaaS“ tonas
 - Jokių švytinčių blob'ų, jokių purpurinių gradientų, jokio „Premium Quality Solutions“
 
+## Logotipas
+
+Ženklas (namas + oranžinė varnelė) atkurtas kaip **inline SVG** pagal originalų logotipą — `currentColor` namui, `--terra` varnelei, todėl ant hero video jis baltas, o pastumdžius puslapį — juodas. Žodinis ženklas — Poppins 700 dviem eilutėmis. Tas pats ženklas naudojamas header'yje, footer'yje ir kaip favicon. Akcentinė spalva `--terra` suvienodinta su logotipo oranžine (`#F04A22`).
+
 ## Funkcionalumas (nepakitęs nuo v1)
 
 - **3 skaičiuoklės**: tiksli vizito kaina (150 / 200 €), orientacinis statybos biudžetas, orientacinė žalos sutvarkymo kaina
