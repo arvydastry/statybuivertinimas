@@ -13,7 +13,7 @@ Perimti konkretūs Harbor elementai, ne tik nuotaika:
 | Pilno ekrano foto/video + milžiniška antraštė apačioje | Drono video virš statomų namų + „Antra nuomonė.“ per visą plotį |
 | Info juosta po hero (miniatiūra · pill mygtukas · „(etiketė)“ · tekstas · ↓) | Tas pats trijų stulpelių išdėstymas |
 | Didelis lengvo svorio teiginys (statement) | „Rangovas nori parduoti darbus…“ |
-| „(About Us)“ · tekstas · apvalintas portretas | „(Apie ekspertą)“ blokas pirmuoju asmeniu |
+| „(About Us)“ · tekstas · apvalintas portretas | „(Apie konsultantą)“ blokas pirmuoju asmeniu |
 | Horizontaliai slenkančios spalvotos panelės su 01/02/03 | 4 situacijos: terakota / gintaras / dangus / juoda, su aukštomis nuotraukomis |
 | Teiginys virš dangaus foto, žodžiai ryškėja slenkant | „Nerekomenduojame parduotuvių…“ |
 | Statistika su pill etiketėmis | 3 skaičiai virš dangaus |

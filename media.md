@@ -5,7 +5,7 @@
 | Hero (fonas) | video | 9554338 | Daniel Moore | https://www.pexels.com/video/9554338/ |
 | Kaip vyksta | video | 6474265 | Tima Miroshnichenko | https://www.pexels.com/video/6474265/ |
 | Info juosta (miniatiūra) | foto | 7937731 | Pavel Danilyuk | https://www.pexels.com/photo/7937731/ |
-| Apie ekspertą (portretas) | foto | 28663270 | iddea photo | https://www.pexels.com/photo/28663270/ |
+| Apie konsultantą (portretas) | foto | 28663270 | iddea photo | https://www.pexels.com/photo/28663270/ |
 | Panelė 01 — planavimas | foto | 6282077 | Yaroslav Shuraev | https://www.pexels.com/photo/6282077/ |
 | Panelė 02 — sąmata | foto | 33175649 | Bia Limova | https://www.pexels.com/photo/33175649/ |
 | Panelė 03 — darbai vyksta | foto | 7937329 | Pavel Danilyuk | https://www.pexels.com/photo/7937329/ |
