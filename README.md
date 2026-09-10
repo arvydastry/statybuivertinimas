@@ -27,7 +27,7 @@ Spalvos: `#E4522E` terakota, `#F5A800` gintaras, `#8FC4F0` dangus, `#EFE9DD` sm�
 
 ## Kodėl tai neatrodo „AI“
 
-- Tikros Pexels nuotraukos ir du video vietoj ikonų tinklelių ir gradientų (sąrašas — `media.md`)
+- Tikros nuotraukos ir du video vietoj ikonų tinklelių ir gradientų: konsultanto portretas — savas (`img/konsultantas.jpg`), likusios — Pexels (sąrašas — `media.md`)
 - Asimetriniai išdėstymai: trijų stulpelių „(etiketė) · tekstas · foto“, persidengiantis koliažas, pasuktos kortelės
 - Konkretus tekstas: Kauno rajono vietovės (Garliava, Domeikava, Raudondvaris…), realios sąmatų klaidos („tinkavimas įtrauktas du kartus“), atsiliepimai su sumomis ir miesteliais
 - Antraštės lengvu svoriu, dideli tarpai, skliaustinės etiketės — redakcinis, ne „SaaS“ tonas
