@@ -12,8 +12,9 @@ Savi failai: `img/konsultantas.jpg` (konsultanto portretas), `img/logo/` (origin
 | Apie konsultantą (portretas) | foto | — | **sava nuotrauka** `img/konsultantas.jpg` | — |
 | Panelė 01 — planavimas | foto | 6282077 | Yaroslav Shuraev | https://www.pexels.com/photo/6282077/ |
 | Panelė 02 — sąmata | foto | 33175649 | Bia Limova | https://www.pexels.com/photo/33175649/ |
-| Panelė 03 — darbai vyksta | foto | 7937329 | Pavel Danilyuk | https://www.pexels.com/photo/7937329/ |
+| Panelė 03 — darbai vyksta / gerbūvis | foto | 16239801 | Marianna Zuzanna | https://www.pexels.com/photo/16239801/ |
 | Panelė 04 — žala | foto | 14032089 | Emma Jane Seymour | https://www.pexels.com/photo/14032089/ |
+| Panelė 05 — statau pats | foto | 8829873 | Ron Lach | https://www.pexels.com/photo/8829873/ |
 | Dangaus juosta | foto | 9158825 | Melike B | https://www.pexels.com/photo/9158825/ |
 | Koliažas A — stogo konstrukcija | foto | 8491085 | Saeed Khokhar | https://www.pexels.com/photo/8491085/ |
 | Koliažas B — mūras | foto | 19688828 | GOWTHAM AGM | https://www.pexels.com/photo/19688828/ |

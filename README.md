@@ -14,7 +14,7 @@ Perimti konkretūs Harbor elementai, ne tik nuotaika:
 | Info juosta po hero (miniatiūra · pill mygtukas · „(etiketė)“ · tekstas · ↓) | Tas pats trijų stulpelių išdėstymas |
 | Didelis lengvo svorio teiginys (statement) | „Rangovas nori parduoti darbus…“ |
 | „(About Us)“ · tekstas · apvalintas portretas | „(Apie konsultantą)“ blokas pirmuoju asmeniu |
-| Horizontaliai slenkančios spalvotos panelės su 01/02/03 | 4 situacijos: terakota / gintaras / dangus / juoda, su aukštomis nuotraukomis |
+| Horizontaliai slenkančios spalvotos panelės su 01/02/03 | 5 situacijos: terakota / gintaras / dangus / juoda / smėlis, su aukštomis nuotraukomis |
 | Teiginys virš dangaus foto, žodžiai ryškėja slenkant | „Nerekomenduojame parduotuvių…“ |
 | Statistika su pill etiketėmis | 3 skaičiai virš dangaus |
 | Foto koliažas + sąrašas | Stogo konstrukcija + mūras, 4 rezultatai, „ką randame sąmatose“ |
@@ -41,7 +41,7 @@ Spalvos: `#E4522E` terakota, `#F5A800` gintaras, `#8FC4F0` dangus, `#EFE9DD` sm�
 
 - **3 skaičiuoklės**: tiksli vizito kaina (150 / 200 €), orientacinis statybos biudžetas, orientacinė žalos sutvarkymo kaina
 - **Užklausos forma** 5 žingsniais + santrauka: dideli mygtukai, progreso juosta, „Atgal“, kaina realiu laiku, validacija tik vardui ir LT numeriui, auto-peršokimas tik pelės paspaudimu (ne klaviatūra)
-- Tel. nr. **+370 601 31453** — juostoje, header'yje, info juostoje, formoje, CTA, footer'yje ir mobilioje apatinėje juostoje
+- Tel. nr. **+370 639 65375** — juostoje, header'yje, info juostoje, formoje, CTA, footer'yje ir mobilioje apatinėje juostoje
 - `prefers-reduced-motion`: video neautostartuoja, horizontalus slinkimas virsta vertikaliu, animacijos išjungiamos
 - Mobiliai (<900 px): panelės sudedamos vertikaliai, hero antraštė lūžta į dvi eilutes, apatinė „Skambinti / Užklausa“ juosta
 
