@@ -12,9 +12,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23111'/%3E%3Cg transform='translate(8 9) scale(.24)'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M100 0 200 75V94H188V190H12V94H0V75ZM100 21 29 74v99h142V74Z'/%3E%3Cpath d='M52 118 85 154 156 82' fill='none' stroke='%23F04A22' stroke-width='26' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
 <style>
 :root{
-  --ink:#1B1B1B;--ink-2:#3B3B3B;--mute:#6F6F6F;--line:#E7E5E1;--line-2:#D6D3CD;
+  --ink:#1B1B1B;--ink-2:#3B3B3B;--mute:#666;--line:#E7E5E1;--line-2:#D6D3CD;
   --bg:#FFFFFF;--bg-2:#F6F5F2;--sand:#EFE9DD;
-  --terra:#F04A22;--amber:#F5A800;--sky:#8FC4F0;
+  --terra:#F04A22;--terra-tx:#C23412;--amber:#F5A800;--sky:#8FC4F0;
   --r:16px;--ease:cubic-bezier(.22,.61,.36,1);
   --shell:min(1320px,calc(100% - 48px));
   --font:"Inter Tight",Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
@@ -26,7 +26,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font
 img,video,svg{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit;color:inherit}
-h1,h2,h3,h4{font-weight:400;margin:0;letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
+h1,h2,h3,h3{font-weight:400;margin:0;letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
 p{margin:0}
 ::selection{background:var(--amber);color:var(--ink)}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
@@ -154,7 +154,7 @@ p{margin:0}
 .list{display:grid;gap:0}
 .list>div{padding:22px 0;border-top:1px solid var(--line)}
 .list>div:first-child{border-top:0;padding-top:0}
-.list h4{font-size:1.12rem;font-weight:500;letter-spacing:-.02em;margin-bottom:6px}
+.list h3{font-size:1.12rem;font-weight:500;letter-spacing:-.02em;margin-bottom:6px}
 .list p{font-size:.95rem;color:var(--ink-2);line-height:1.55;max-width:46ch}
 .errs{margin-top:34px;background:var(--sand);border-radius:var(--r);padding:24px 26px}
 .errs b{display:block;font-weight:500;font-size:.95rem;margin-bottom:12px}
@@ -169,7 +169,7 @@ p{margin:0}
 .step{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:30px 0;border-top:1px solid var(--line)}
 .step:first-child{border-top:0;padding-top:0}
 .step em{font-style:normal;font-size:1.9rem;letter-spacing:-.04em;line-height:1;color:var(--terra)}
-.step h4{font-size:1.25rem;font-weight:500;letter-spacing:-.02em;margin-bottom:8px}
+.step h3{font-size:1.25rem;font-weight:500;letter-spacing:-.02em;margin-bottom:8px}
 .step p{color:var(--ink-2);font-size:.98rem;line-height:1.55;max-width:50ch}
 
 /* calculators */
@@ -208,7 +208,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .orows{margin-top:auto;padding-top:26px}
 .orow{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid rgba(0,0,0,.1);font-size:.9rem;align-items:baseline}
 .orow span{color:var(--ink-2)}.orow b{font-weight:500;white-space:nowrap}
-.orow.tot{border-top:1px solid var(--ink)}.orow.tot b{font-size:1.25rem;letter-spacing:-.02em;color:var(--terra)}
+.orow.tot{border-top:1px solid var(--ink)}.orow.tot b{font-size:1.25rem;letter-spacing:-.02em;color:var(--terra-tx)}
 .bars{margin-top:24px;display:grid;gap:10px}
 .bar b{display:flex;justify-content:space-between;font-size:.8rem;font-weight:400;margin-bottom:5px;color:var(--ink-2)}
 .bar-t{height:5px;background:rgba(0,0,0,.09);border-radius:99px;overflow:hidden}
@@ -319,7 +319,7 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
 .wmk span{position:absolute;left:50%;bottom:-.24em;transform:translateX(-50%);font-size:clamp(84px,11.2vw,190px);letter-spacing:-.05em;line-height:1;white-space:nowrap;color:var(--ink)}
 .callbar{position:fixed;inset:auto 0 0;z-index:52;display:none;grid-template-columns:1fr 1fr;background:var(--ink);color:#fff;border-top:1px solid rgba(255,255,255,.1)}
 .callbar a{padding:16px;text-align:center;font-weight:500;font-size:.95rem;display:flex;gap:8px;align-items:center;justify-content:center}
-.callbar a:first-child{background:var(--terra)}
+.callbar a:first-child{background:var(--terra-tx)}   /* baltas tekstas ant oranžinės: kontrastas 5.5:1 */
 .callbar svg{width:15px;height:15px}
 
 /* cookie notice */
@@ -409,7 +409,7 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
 <section class="strip">
   <div class="shell strip-in">
     <div class="strip-l">
-      <div class="rimg"><img src="https://images.pexels.com/photos/7937731/pexels-photo-7937731.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div>
+      <div class="rimg"><img src="https://images.pexels.com/photos/7937731/pexels-photo-7937731.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Statybų konsultantas objekte" loading="lazy"></div>
       <div>
         <p>Nepriklausomas statybų konsultantas Kaune ir visoje Lietuvoje.</p>
         <a class="pill" href="tel:+37063965375">Skambinti +370 639 65375 <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a>
@@ -509,10 +509,10 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
       </div>
       <div class="r">
         <div class="list">
-          <div><h4>Skaičiai, ne įspūdžiai</h4><p>Kiekiai ir kainos pagal šių metų rinką, palyginti su tuo, ką jums pasiūlė.</p></div>
-          <div><h4>Rizikos su kaina</h4><p>Kas gali pabrangti ir kiek. Kurie sprendimai vėliau bus sunkiai pataisomi.</p></div>
-          <div><h4>Realūs terminai</h4><p>Įskaitant džiūvimo pertraukas ir sezoną — ne tik rangovo optimizmą.</p></div>
-          <div><h4>Konsultacija žodžiu</h4><p>Susitikus akis į akį viską išaiškiname paprasta kalba, be žargono. Galimybė pasitarti ir telefonu.</p></div>
+          <div><h3>Skaičiai, ne įspūdžiai</h3><p>Kiekiai ir kainos pagal šių metų rinką, palyginti su tuo, ką jums pasiūlė.</p></div>
+          <div><h3>Rizikos su kaina</h3><p>Kas gali pabrangti ir kiek. Kurie sprendimai vėliau bus sunkiai pataisomi.</p></div>
+          <div><h3>Realūs terminai</h3><p>Įskaitant džiūvimo pertraukas ir sezoną — ne tik rangovo optimizmą.</p></div>
+          <div><h3>Konsultacija žodžiu</h3><p>Susitikus akis į akį viską išaiškiname paprasta kalba, be žargono. Galimybė pasitarti ir telefonu.</p></div>
         </div>
         <div class="errs">
           <b>Ką dažniausiai randame sąmatose</b>
@@ -542,10 +542,10 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
         <span class="lab r">Kaip vyksta</span>
         <h2 class="h2 r" style="margin:16px 0 40px">Keturi žingsniai.<br>Be biurokratijos.</h2>
         <div class="steps">
-          <div class="step r"><em>01</em><div><h4>Susisiekiate</h4><p>Paskambinate arba užpildote užklausą — 5 paprasti klausimai, apie 2 minutes. Klausiame tik to, ko tikrai reikia.</p></div></div>
-          <div class="step r"><em>02</em><div><h4>Suderiname vizitą</h4><p>Perskambiname tą pačią arba kitą darbo dieną ir sutariame laiką bei vietą — objekte arba pas jus namuose.</p></div></div>
-          <div class="step r"><em>03</em><div><h4>Susitinkame vietoje</h4><p>Apžiūrime, matuojame, peržiūrime dokumentus ir sąmatas. Skiriame 1–2 valandas — tiek, kiek reikia klausimui išsiaiškinti.</p></div></div>
-          <div class="step r"><em>04</em><div><h4>Gaunate išvadas</h4><p>Išvados žodžiu — skaičiai, rizikos ir rekomendacijos paprasta kalba. Iškilus klausimams — atsakome ir telefonu po susitikimo.</p></div></div>
+          <div class="step r"><em>01</em><div><h3>Susisiekiate</h3><p>Paskambinate arba užpildote užklausą — 5 paprasti klausimai, apie 2 minutes. Klausiame tik to, ko tikrai reikia.</p></div></div>
+          <div class="step r"><em>02</em><div><h3>Suderiname vizitą</h3><p>Perskambiname tą pačią arba kitą darbo dieną ir sutariame laiką bei vietą — objekte arba pas jus namuose.</p></div></div>
+          <div class="step r"><em>03</em><div><h3>Susitinkame vietoje</h3><p>Apžiūrime, matuojame, peržiūrime dokumentus ir sąmatas. Skiriame 1–2 valandas — tiek, kiek reikia klausimui išsiaiškinti.</p></div></div>
+          <div class="step r"><em>04</em><div><h3>Gaunate išvadas</h3><p>Išvados žodžiu — skaičiai, rizikos ir rekomendacijos paprasta kalba. Iškilus klausimams — atsakome ir telefonu po susitikimo.</p></div></div>
         </div>
       </div>
     </div>
@@ -663,13 +663,13 @@ textarea.fin{min-height:116px;resize:vertical;line-height:1.55}
   <div class="shell tst">
     <span class="side r">Atsiliepimai</span>
     <div class="tcards">
-      <div class="tc r"><div class="tc-top"><b>R</b><div class="rimg"><img src="https://images.pexels.com/photos/8727573/pexels-photo-8727573.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div></div>
+      <div class="tc r"><div class="tc-top"><b>R</b><div class="rimg"><img src="https://images.pexels.com/photos/8727573/pexels-photo-8727573.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Rolandas — klientas iš Kauno" loading="lazy"></div></div>
         <q>Sąmatoje radome dvigubai įtrauktą tinkavimą ir 4 000 € „smulkių darbų“. Rangovas pataisė be ginčų, kai parodžiau išvadas.</q>
         <div class="who"><b>Rūta, Garliava</b><span>Sąmatos patikra · 150 €</span></div></div>
-      <div class="tc r"><div class="tc-top"><b>V</b><div class="rimg"><img src="https://images.pexels.com/photos/29819387/pexels-photo-29819387.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div></div>
+      <div class="tc r"><div class="tc-top"><b>V</b><div class="rimg"><img src="https://images.pexels.com/photos/29819387/pexels-photo-29819387.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Vaida — klientė iš Garliavos" loading="lazy"></div></div>
         <q>Prieš pirkdami sklypą pasikvietėme apžiūrai. Pasakė, kad reikės polinių pamatų — projektuotojas to nebuvo minėjęs.</q>
         <div class="who"><b>Vytautas, Kaunas</b><span>Planavimas · 150 €</span></div></div>
-      <div class="tc r"><div class="tc-top"><b>D</b><div class="rimg"><img src="https://images.pexels.com/photos/9727699/pexels-photo-9727699.jpeg?auto=compress&cs=tinysrgb&w=300" alt="" loading="lazy"></div></div>
+      <div class="tc r"><div class="tc-top"><b>D</b><div class="rimg"><img src="https://images.pexels.com/photos/9727699/pexels-photo-9727699.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Darius — klientas iš Kauno rajono" loading="lazy"></div></div>
         <q>Po užliejimo draudikas siūlė 1 200 €. Su konsultanto įvertinimu gavome 3 800 €. Vizitas kainavo 200 €.</q>
         <div class="who"><b>Danutė, Jonava</b><span>Žalos vertinimas · 200 €</span></div></div>
     </div>
